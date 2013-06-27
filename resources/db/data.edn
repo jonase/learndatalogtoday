@@ -153,9 +153,9 @@
   :movie/title "The Terminator"
   :movie/year 1984
   :movie/director #db/id [:db.part/user -100]
-  :movie/cast #{#db/id [:db.part/user -101]
+  :movie/cast [#db/id [:db.part/user -101]
                #db/id [:db.part/user -102]
-               #db/id [:db.part/user -103]}
+               #db/id [:db.part/user -103]]
   :movie/sequel #db/id [:db.part/user -207]}
 
  {:db/id #db/id [:db.part/user -201]

@@ -1,5 +1,8 @@
 (ns learndatalogtoday.core
   (:require [learndatalogtoday.remote :as remote]
+            [goog.History :as History]
+            [goog.events]
+            [goog.events.EventType]
             [hiccups.runtime :as hiccup]
             [domina]
             [domina.css :refer [sel]]
@@ -8,6 +11,8 @@
 (def $ js/$)
 (defn log [x]
   (.log js/console x))
+
+(def history (goog.History.))
 
 (let [converter (js/Markdown.Converter.)]
   (defn md [text]
@@ -55,12 +60,9 @@
 (defn get-current-editor-values []
   (map #(.getValue %) (get-current-editors)))
 
-(defn init []
-  (remote/get "/exercises/0"
-    (fn [chapter]
-      (log (pr-str chapter))
-      (let [text (:text chapter)
-            exercises (:exercises chapter)]
+(defn render-chapter [chapter]
+  (let [text (:text chapter)
+        exercises (:exercises chapter)]
         (domina/append! (domina/by-id "text-content")
                         (md text))
         
@@ -87,4 +89,19 @@
                           (let [args (get-current-editor-values)]
                             (log (pr-str args)))))
         
-        (-> ($ "a[href=\"#tab0\"]") (.tab "show"))))))
+        (-> ($ "a[href=\"#tab0\"]") (.tab "show"))))
+
+(defn init []
+  (remote/get "/chapters"
+    (fn [chapters]
+      (goog.events/listen history
+                          (.-NAVIGATE goog.history/EventType)
+                          (fn [evt]
+                            (let [n (js/parseInt (.-token evt))]
+                              (if (js/isNaN n)
+                                (.setToken history "0")
+                                (render-chapter (chapters n))))))
+      (.setEnabled history true)
+
+
+      )))
