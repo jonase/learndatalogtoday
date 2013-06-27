@@ -1,0 +1,43 @@
+[
+ {:db/ident :movie/title
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/id #db/id [:db.part/db]
+  :db.install/_attribute :db.part/db}
+
+ {:db/ident :movie/year
+  :db/valueType :db.type/long
+  :db/cardinality :db.cardinality/one
+  :db/id #db/id [:db.part/db]
+  :db.install/_attribute :db.part/db}
+
+ {:db/ident :movie/director
+  :db/valueType :db.type/ref
+  :db/cardinality :db.cardinality/many
+  :db/id #db/id [:db.part/db]
+  :db.install/_attribute :db.part/db}
+
+ {:db/ident :movie/sequel
+  :db/valueType :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db/id #db/id [:db.part/db]
+  :db.install/_attribute :db.part/db}
+ 
+ {:db/ident :movie/cast
+  :db/valueType :db.type/ref
+  :db/cardinality :db.cardinality/many
+  :db/id #db/id [:db.part/db]
+  :db.install/_attribute :db.part/db}
+ 
+ {:db/ident :person/name
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/id #db/id [:db.part/db]
+  :db.install/_attribute :db.part/db}
+
+ {:db/ident :trivia
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/many
+  :db/id #db/id [:db.part/db]
+  :db.install/_attribute :db.part/db}
+]

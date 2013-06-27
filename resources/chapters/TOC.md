@@ -17,7 +17,7 @@
     * Find all movie names
     * Find the entity id's of all the directors
     
-* Chapter 2: Joins
+* Chapter 2: Data patterns
   - Joins are implicit
   - Simple example
   - A second example

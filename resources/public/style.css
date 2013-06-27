@@ -1,0 +1,26 @@
+table.fail {
+    background-color: #FEE;
+}
+
+table.success {
+    background-color: #EFE;
+}
+
+.CodeMirror {
+    height: auto; 
+    border: 1px solid lightgrey
+}
+.CodeMirror-scroll {
+    overflow-y: hidden; 
+    overflow-x: auto;
+}
+
+#text-content h1 {
+  font-size: 16pt;
+  color: #049cdb;
+}
+
+#text-content h2 {
+  font-size: 14pt;
+  color: #049cdb;
+}
