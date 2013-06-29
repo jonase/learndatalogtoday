@@ -18,9 +18,6 @@
   (defn md [text]
     (.makeHtml converter text)))
 
-;; A map from id -> code-mirror instance
-(def editors (atom {}))
-
 (def state (atom {:current-tab nil}))
 
 (defn build-input [tab-n input-n input]
