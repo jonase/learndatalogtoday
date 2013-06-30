@@ -1,3 +1,10 @@
+textarea {
+     width: 100%;
+     font-family: monospace;
+     height:100px;
+     resize:none;
+}
+
 table.fail {
     background-color: #FEE;
 }

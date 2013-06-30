@@ -1,4 +1,5 @@
-{:text "#Chapter 1: Basic Queries
+{:title "Basic Queries"
+ :text "#Chapter 1: Basic Queries
 
 The example database we'll use contains *movies* mostly, but not
 exclusively, from the 80s. There is information about movie titles,

@@ -5,7 +5,7 @@
                  [compojure "1.1.5"]
                  [com.datomic/datomic-free "0.8.4007"]
                  [hiccup "1.0.3"]
-
+                 [markdown-clj "0.9.28"]
                  ;; cljs
                  [hiccups "0.2.0"]
                  [domina "1.0.1"]]

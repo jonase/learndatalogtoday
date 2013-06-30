@@ -18,6 +18,11 @@
    (GET "/chapters"
      []
      (edn-response chapters))
+
+   (GET "/chapter/:n"
+     [n]
+     (html5 (views/chapter chapters (Integer/parseInt n)))
+     )
    
    (GET "/exercises/:n" 
      [n] 
