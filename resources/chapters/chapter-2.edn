@@ -2,8 +2,8 @@
  :text "# Chapter 2: Data patterns
 
 In the previous chapter we looked at **data patterns**, i.e., vectors
-after the `:where` clause of the form `[?e :movie/title
-\"Commando\"]`. There can be many data patterns in a `:where` clause:
+after the `:where` clause of the form `[?e :movie/title \"Commando\"]`. 
+There can be many data patterns in a `:where` clause:
 
     [:find ?title
      :where

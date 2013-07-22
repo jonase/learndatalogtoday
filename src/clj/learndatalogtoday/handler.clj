@@ -11,9 +11,11 @@
    :headers {"Content-Type" "application/edn"}
    :body (pr-str edn-data)})
 
+(declare read-chapter)
+
 (defn app-routes [db chapters]
   (routes
-   (GET "/" [] (html5 (views/base)))
+   (GET "/" [])
    
    (GET "/chapters"
      []
@@ -21,12 +23,10 @@
 
    (GET "/chapter/:n"
      [n]
-     (html5 (views/chapter chapters (Integer/parseInt n)))
+     #_(chapters (Integer/parseInt n))
+     ;; For fast dev
+     (read-chapter (Integer/parseInt n))
      )
-   
-   (GET "/exercises/:n" 
-     [n] 
-     (slurp (str "resources/chapters/chapter-1.edn")))
    
    (route/resources "/")
    (route/not-found "Not Found")))
@@ -43,12 +43,18 @@
 (defn read-file [s]
   (read-string (slurp s)))
 
+(defn read-chapter 
+  "Returns a html string"
+  [chapter]
+  (let [chapter-data (->> chapter
+                          (format "resources/chapters/chapter-%s.edn") 
+                          read-file)]
+    (views/chapter-response (assoc chapter-data
+                              :chapter chapter))))
+
 (def app
   (let [schema (read-file "resources/db/schema.edn")
         seed-data (read-file "resources/db/data.edn")
         db (init-db "movies" schema seed-data)
-        chapters (mapv read-file ["resources/chapters/chapter-0.edn"
-                                  "resources/chapters/chapter-1.edn"
-                                  "resources/chapters/chapter-2.edn"
-                                  "resources/chapters/chapter-3.edn"])] 
+        chapters (mapv read-chapter [0])] 
     (handler/site (app-routes db chapters))))

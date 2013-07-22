@@ -1,33 +1,19 @@
-textarea {
-     width: 100%;
-     font-family: monospace;
-     height:100px;
-     resize:none;
+.textcontent h1 {
+    color: #08c;
+    font-size: 18pt;
 }
 
-table.fail {
-    background-color: #FEE;
-}
-
-table.success {
-    background-color: #EFE;
+.textcontent p {
+    text-align: justify;
 }
 
 .CodeMirror {
     height: auto; 
-    border: 1px solid lightgrey
+    border: 1px solid lightgrey;
+    margin-bottom:10px;
 }
 .CodeMirror-scroll {
     overflow-y: hidden; 
     overflow-x: auto;
 }
 
-#text-content h1 {
-  font-size: 16pt;
-  color: #049cdb;
-}
-
-#text-content h2 {
-  font-size: 14pt;
-  color: #049cdb;
-}
