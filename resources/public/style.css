@@ -3,6 +3,11 @@
     font-size: 18pt;
 }
 
+.textcontent h2 {
+    color: #08c;
+    font-size: 16pt;
+}
+
 .textcontent p {
     text-align: justify;
 }
@@ -17,3 +22,10 @@
     overflow-x: auto;
 }
 
+table.resultset {
+    font-family: monospace;
+}
+
+table.resultset thead {
+    font-weight: bold;
+}

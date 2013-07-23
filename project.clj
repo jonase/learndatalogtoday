@@ -7,6 +7,7 @@
                  [hiccup "1.0.3"]
                  [markdown-clj "0.9.28"]
                  ;; cljs
+                 [hylla "0.1.0-SNAPSHOT"]
                  [hiccups "0.2.0"]
                  [domina "1.0.1"]]
   :plugins [[lein-ring "0.8.5"]

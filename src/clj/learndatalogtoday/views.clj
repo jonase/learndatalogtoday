@@ -65,7 +65,13 @@
           [:div.span8
            [:button.btn.btn-block {:id (str "run-query-" tab-n) 
                                    :data-tab tab-n} 
-            "Run Query"]]]]))
+            "Run Query"]]]
+         [:div.row
+          [:div.span8
+           [:div.alerts]
+           [:table.table.table-striped.resultset
+            [:thead]
+            [:tbody]]]]]))
 
 (defn build-exercises [exercises]
   (list [:div.tabbable
