@@ -3,7 +3,7 @@
   :url "http://learndatalogtoday.org"
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [compojure "1.1.5"]
-                 [com.datomic/datomic-free "0.8.4007"]
+                 [com.datomic/datomic-free "0.8.4020.26"]
                  [hiccup "1.0.3"]
                  [markdown-clj "0.9.28"]
                  ;; cljs

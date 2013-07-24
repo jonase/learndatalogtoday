@@ -23,11 +23,11 @@ Rewriting the above query to accept the name of any person:
      [?m :movie/cast ?p]
      [?m :movie/title ?title]]
 
-This query accepts two arguments: `$` is the database
-itself (implicit, if no `:in` clause is specified) and `?name` which
-presumably will be the name of some actor. The above query could be
-executed like `Peer.q(query, conn.db(), "Sylvester Stallone")` where
-`query` is the query above. It's possible to have any number of inputs
+This query takes two arguments: `$` is the database itself (implicit,
+if no `:in` clause is specified) and `?name` which presumably will be
+the name of some actor. The above query could be executed like 
+`(q query db "Sylvester Stallone")` where `query` is the query above and
+`db` is a database value. It's possible to have any number of inputs
 to a query
 
 In the above query the input pattern variable `?name` is bound to a
@@ -38,7 +38,7 @@ input: scalars, tuples, collections and relations.
 
 A tuple input is written as e.g. `[?name ?age]` and can be used when
 you want to destructure an input. Let's say you have the vector
-["James Cameron", "Arnold Schwarznegger"] and you want to use this
+`["James Cameron" "Arnold Schwarznegger"]` and you want to use this
 as input to find all movies where these two people collaborated:
 
     [:find ?title
@@ -61,7 +61,7 @@ You can use collection destructuring to implement a kind of logical **or** in yo
      [?m :movie/director ?d]
      [?m :movie/title ?title]]
 
-This query could be called with `(q query (db conn) ["James Cameron" "Ridley Scott"])`.
+This query could be called with `(q query db ["James Cameron" "Ridley Scott"])`.
 
 ## Relations
 

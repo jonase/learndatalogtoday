@@ -42,6 +42,6 @@ Note that the query is a vector with four elements:
 * the keyword `:where`
 * the vector `[_ :movie/title ?title]`
 
-We'll go over the specific parts of the query later but for now you
+We'll go over the specific parts of the query later but for now you 
 should simply type the above query verbatim into the textbox below,
 press **Run Query** and continue to the next part of the tutorial.

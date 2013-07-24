@@ -84,5 +84,3 @@
         chapters (mapv read-chapter [0])] 
     (handler/site (app-routes db chapters))))
 
-
-(get-in (read-chapter 0) [:exercises])

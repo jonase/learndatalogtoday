@@ -1,0 +1,21 @@
+{:text-file "resources/chapters/chapter-5.md"
+ :exercises 
+ [{:question "Find movies older than a certain year (inclusive)"
+   :inputs 
+   [{:type :query
+     :value "[:find ?title ...]"
+     :correct-value "[:find ?title\n :in $ ?year\n :where\n [?m :movie/title ?title]\n [?m :movie/year ?y]\n [(<= ?y ?year)]]"}
+    {:type :value
+     :value "1979"}]}
+  {:question "Find movies newer than `?year` (inclusive) and has a `?rating` higher than the one supplied"
+   :inputs 
+   [{:type :query
+     :value "[:find ?title ...]"
+     :correct-value "[:find ?title :in $ ?year ?rating [[?title ?r]] :where [(< ?rating ?r)] [?m :movie/title ?title] [?m :movie/year ?y] [(<= ?year ?y)]]"}
+    {:type :value
+     :value "1990"}
+    {:type :value
+     :value "8.0"}
+    {:type :value
+     :value "[[\"Die Hard\" 8.3]\n [\"Alien\" 8.5]\n [\"Lethal Weapon\" 7.6]\n [\"Commando\" 6.5]\n [\"Mad Max Beyond Thunderdome\" 6.1]\n [\"Mad Max 2\" 7.6]\n [\"Rambo: First Blood Part II\" 6.2]\n [\"Braveheart\" 8.4]\n [\"Terminator 2: Judgment Day\" 8.6]\n [\"Predator 2\" 6.1]\n [\"First Blood\" 7.6]\n [\"Aliens\" 8.5]\n [\"Terminator 3: Rise of the Machines\" 6.4]\n [\"Rambo III\" 5.4]\n [\"Mad Max\" 7.0]\n [\"The Terminator\" 8.1]\n [\"Lethal Weapon 2\" 7.1]\n [\"Predator\" 7.8]\n [\"Lethal Weapon 3\" 6.6]\n [\"RoboCop\" 7.5]]"}
+    ]}]}
