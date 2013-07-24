@@ -28,6 +28,11 @@
        [:div.textcontent text]]]
      [:div.row
       [:div.span8.offset2
+       (when (> chapter 0) [:a {:href (str "/chapter/" (dec chapter))} "<< Previous chapter"])
+       (when (< chapter 10) [:a.pull-right {:href (str "/chapter/" (inc chapter))} "Next chapter >>"])
+       ]]
+     [:div.row {:style "margin-top: 14px"}
+      [:div.span8.offset2
        [:div.exercises exercises]]]
      [:div.row
       [:div.span8.offset2

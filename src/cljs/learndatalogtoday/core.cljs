@@ -31,19 +31,18 @@
     (domina/destroy-children! tbody)
     (if (= :error (:status result-data))
       (domina/append! alert (render-error (:message result-data)))
-      (do (when (= :fail (:status result-data))
-            (domina/append! alert (render-fail "Sorry, these results are not correct")))
+      (do (if (= :fail (:status result-data))
+            (domina/append! alert (render-fail "Sorry, these results are not correct"))
+            (domina/add-class! (sel ".active .label") "label-success"))
           (domina/append! thead (render-row (find-clause query)))
           (doseq [row (:result result-data)]
             (domina/append! tbody (render-row row)))))))
 
 (defn run-query-fn [chapter exercise editors]
-  (fn [e]
+  (fn [event]
     (try
       (let [input-strings (map #(.getValue %) editors)
-            ;; TODO: Error handling
             input-data (map read-string input-strings)]
-        
         (remote/post (format "/query/%s/%s" chapter exercise)
                      input-data
                      #(render-result exercise (first input-data) %)))
@@ -68,6 +67,3 @@
 
       (listen! (sel button-id) :click
                (run-query-fn chapter n editors)))))
-
-
-
