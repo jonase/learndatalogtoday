@@ -5,6 +5,25 @@
              :value "[:find ?person ?age\n ...]"
              :correct-value "[:find ?name ?age\n :where\n [?p :person/name \"Sylvester Stallone\"]\n [?p :person/born ?sborn]\n [?p2 :person/name ?name]\n [?p2 :person/born ?born]\n [(< ?sborn ?born)]\n [(learndatalogtoday.handler/age ?born #inst \"2013-07-21T00:00:00.000-00:00\") ?age]]"}]}
 
+ {:question "Who's born on the same day and month as Ridley Scott? Not including Ridley Scott himself."
+   :inputs [{:type :query
+             :value "[:find ?name-1 ?name-2\n :where\n ...]"
+             :correct-value "[:find ?name
+ :where
+ [?r :person/name \"Ridley Scott\"]
+ [?r :person/born ?rborn]
+ [?p :person/name ?name]
+ [?p :person/born ?born]
+ [(.getMonth ?rborn) ?rm]
+ [(.getDay ?rborn) ?rd]
+ [(.getMonth ?born) ?m]
+ [(.getDay ?born) ?d]
+ [(= ?rm ?m)]
+ [(= ?rd ?d)]
+ [(not= ?name \"Ridley Scott\")]]
+ "
+}]}
+
   {:question "The birthday paradox"
    :inputs [{:type :query
              :value "[:find ?name-1 ?name-2\n :where\n ...]"
