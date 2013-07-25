@@ -7,10 +7,10 @@ with type `:db.type/instant`. Given the birthday it's easy to
 calculate the (very approximate) age of a person:
 
     (defn age [birthday today]
-      (/ (- (.getTime today)
-            (.getTime birthday))
-         (* 1000 60 60 24 365))
-         
+      (quot (- (.getTime today)
+               (.getTime birthday))
+            (* 1000 60 60 24 365)))
+
 with this function in hand we can now calculate the age of a person
 
     [:find ?age

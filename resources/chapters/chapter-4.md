@@ -4,7 +4,7 @@ A datom, as described earlier, is the 4-tuple `[eid attr val tx]`. So far, we ha
 
 ## Attributes 
 
-For example, say we wan't to find all attributes that are associated with person entities in our database. We know for certain that `:person/name` is one such attribute but are there others we have not yet seen?
+For example, say we want to find all attributes that are associated with person entities in our database. We know for certain that `:person/name` is one such attribute but are there others we have not yet seen?
 
     [:find ?attr
      :where 

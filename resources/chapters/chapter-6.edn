@@ -1,1 +1,27 @@
-{:text-file "resources/chapters/chapter-6.md"}
+{:text-file "resources/chapters/chapter-6.md"
+ :exercises 
+ [{:question "Find people younger than \"Sylvester Stallone\" and their ages."
+   :inputs [{:type :query
+             :value "[:find ?person ?age\n ...]"
+             :correct-value "[:find ?name ?age\n :where\n [?p :person/name \"Sylvester Stallone\"]\n [?p :person/born ?sborn]\n [?p2 :person/name ?name]\n [?p2 :person/born ?born]\n [(< ?sborn ?born)]\n [(learndatalogtoday.handler/age ?born #inst \"2013-07-21T00:00:00.000-00:00\") ?age]]"}]}
+
+  {:question "The birthday paradox"
+   :inputs [{:type :query
+             :value "[:find ?name-1 ?name-2\n :where\n ...]"
+             :correct-value "[:find ?name-1 ?name-2
+ :where
+ [?p1 :person/name ?name-1]
+ [?p1 :person/born ?born-1]
+ [?p2 :person/name ?name-2]
+ [?p2 :person/born ?born-2]
+ [(.getMonth ?born-1) ?m1]
+ [(.getDay ?born-1) ?d1]
+ [(.getMonth ?born-2) ?m2]
+ [(.getDay ?born-2) ?d2]
+ [(= ?m1 ?m2)]
+ [(= ?d1 ?d2)]
+ [(not= ?name-1 ?name-2)]]
+ "
+}]}
+]
+}

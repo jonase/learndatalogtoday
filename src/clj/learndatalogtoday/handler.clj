@@ -5,7 +5,13 @@
             [compojure.handler :as handler]
             [compojure.route :as route]
             [datomic.api :as d]
-            [hiccup.page :refer [html5]]))
+            [hiccup.page :refer [html5]])
+  (:import [java.util Date]))
+
+(defn age [^Date birthday ^Date today]
+  (quot (- (.getTime today)
+           (.getTime birthday))
+        (* 1000 60 60 24 365)))
 
 (defn edn-response [edn-data]
   {:status 200
