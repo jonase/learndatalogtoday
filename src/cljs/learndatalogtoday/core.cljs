@@ -1,11 +1,14 @@
 (ns learndatalogtoday.core
-  (:require [learndatalogtoday.query :refer [find-clause]]
-            [cljs.reader :refer [read-string]] 
+  (:require [cljs.reader :refer [read-string]]
+            [datomic-query-helpers.core :refer [normalize]]
             [hylla.remote :as remote] 
             [domina :refer [by-id nodes]]
             [domina.css :refer [sel]]
             [domina.events :refer [listen!]]
             [hiccups.runtime :refer [render-html]]))
+
+(defn find-clause [q]
+  (:find (normalize q)))
 
 (defn render-row [row] 
   (render-html 

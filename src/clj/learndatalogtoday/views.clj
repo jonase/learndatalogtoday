@@ -14,6 +14,11 @@
      [:a {:href "#"} "about"] " | "
      [:a {:href "#"} "license"]]]])
 
+(defn row [& content]
+  [:div.row
+   [:div.offset2.span8
+    content]])
+
 (defn base [chapter text exercises ecount]
   [:html
    [:head
@@ -23,20 +28,15 @@
     [:title "Learn Datalog Today!"]]
    [:body
     [:div.container
-     [:div.row
-      [:div.span8.offset2
-       [:div.textcontent text]]]
-     [:div.row
-      [:div.span8.offset2
-       (when (> chapter 0) [:a {:href (str "/chapter/" (dec chapter))} "<< Previous chapter"])
-       (when (< chapter 10) [:a.pull-right {:href (str "/chapter/" (inc chapter))} "Next chapter >>"])
-       ]]
-     [:div.row {:style "margin-top: 14px"}
-      [:div.span8.offset2
-       [:div.exercises exercises]]]
-     [:div.row
-      [:div.span8.offset2
-       (footer)]]]
+     (row [:div.textcontent text])
+     (row (when (> chapter 0) 
+            [:a {:href (str "/chapter/" (dec chapter))} 
+             "<< Previous chapter"])
+          (when (< chapter 10) 
+            [:a.pull-right {:href (str "/chapter/" (inc chapter))} 
+             "Next chapter >>"]))
+     (row [:div.exercises {:style "margin-top: 14px"} exercises])
+     (row (footer))]
     (include-js "/third-party/jquery/jquery-1.10.1.min.js")
     (include-js "/third-party/codemirror-3.14/lib/codemirror.js")
     (include-js "/third-party/codemirror-3.14/mode/clojure/clojure.js")
