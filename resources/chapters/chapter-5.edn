@@ -3,15 +3,26 @@
  [{:question "Find movies older than a certain year (inclusive)"
    :inputs 
    [{:type :query
-     :value "[:find ?title ...]"
-     :correct-value "[:find ?title\n :in $ ?year\n :where\n [?m :movie/title ?title]\n [?m :movie/year ?y]\n [(<= ?y ?year)]]"}
+     :value [:find ?title ...]
+     :correct-value [:find ?title 
+                     :in $ ?year 
+                     :where 
+                     [?m :movie/title ?title] 
+                     [?m :movie/year ?y] 
+                     [(<= ?y ?year)]]}
     {:type :value
      :value "1979"}]}
   {:question "Find movies newer than `?year` (inclusive) and has a `?rating` higher than the one supplied"
    :inputs 
    [{:type :query
-     :value "[:find ?title ...]"
-     :correct-value "[:find ?title :in $ ?year ?rating [[?title ?r]] :where [(< ?rating ?r)] [?m :movie/title ?title] [?m :movie/year ?y] [(<= ?year ?y)]]"}
+     :value [:find ?title :in ... :where ...]
+     :correct-value [:find ?title 
+                     :in $ ?year ?rating [[?title ?r]] 
+                     :where 
+                     [(< ?rating ?r)] 
+                     [?m :movie/title ?title] 
+                     [?m :movie/year ?y] 
+                     [(<= ?year ?y)]]}
     {:type :value
      :value "1990"}
     {:type :value

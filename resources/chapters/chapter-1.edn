@@ -4,8 +4,8 @@
               :hints ["You will need to use the `:movie/year` attribute" 
                       "The data pattern should look something like `[?e :movie/title 1987]`"]
               :inputs [{:type :query
-                        :value "[:find ?e\n :where\n ...]"
-                        :correct-value "[:find ?e\n :where\n [?e :movie/year 1987]]"}]}
+                        :value [:find ?e :where ...]
+                        :correct-value [:find ?e :where [?e :movie/year 1987]]}]}
              
              {:question "Find the entity-id **and** titles of movies in the database"
               :hints ["You'll need two pattern variables in the find clause"
@@ -18,22 +18,7 @@
              {:question "Find the name of all people in the database"
               :hints ["You'll need to use `:person/name` attribute"]
               :inputs [{:type :query
-                        :value ""
-                        :correct-value "[:find ?name \n :where \n [?p :person/name ?name]]"}]}
-             
-             {:question "Write a rule `(director-name ?e ?name)` where `?e` is a movie and `?name` is the name of the director."
-              :hints ["The rule body will need two data patterns."
-                      "You'll need the `:movie/director` and
-                      `:person/name` attributes"]
-              :inputs [{:type :query
-                        :value "[:find ?e\n :in $ %\n :where\n (director-name ?e \"Mel Gibson\")]"}
-                       {:type :rule
-                        :value "[[(director-name ?e ?name)\n  ...]]"}]}
-             
-             {:question "Write a query that finds the movie titles given an actor name"
-              :hints []
-              :inputs [{:type :query
-                        :value ""
-                        :correct-value "[:find ?title :in $ ?name :where [?p :person/name ?name] [?m :movie/cast ?p] [?m :movie/title ?title]]"}
-                       {:type :value
-                        :value "\"Danny Glover\""}]}]}
+                        :value [:find]
+                        :correct-value [:find ?name 
+                                        :where 
+                                        [?p :person/name ?name]]}]}]}

@@ -4,21 +4,34 @@
 :exercises 
  [{:question "Find movie title by year"
    :inputs [{:type :query
-             :value "[:find ?title \n :in $ ?year\n :where\n ...]"
-             :correct-value "[:find ?title \n :in $ ?year\n :where\n [?m :movie/year ?year]\n [?m :movie/title ?title]]"}
+             :value [:find ?title :in $ ?year :where ...]
+             :correct-value [:find ?title 
+                             :in $ ?year 
+                             :where 
+                             [?m :movie/year ?year] 
+                             [?m :movie/title ?title]]}
             {:type :value
              :value "1988"}]}
   {:question "Given a list of movie titles, list the title and the year that movie was released"
    :inputs [{:type :query
-             :value "[:find ?title ?year\n :in ???\n :where ???]"
-             :correct-value "[:find ?title ?year\n :in $ [?title ...] \n :where [?m :movie/title ?title] [?m :movie/year ?year]]"}
+             :value [:find ?title ?year :in ... :where ...]
+             :correct-value [:find ?title ?year 
+                             :in $ [?title ...] 
+                             :where 
+                             [?m :movie/title ?title] 
+                             [?m :movie/year ?year]]}
             {:type :value
              :value "[\"Lethal Weapon\" \"Lethal Weapon 2\" \"Lethal Weapon 3\"]"}]}
 
   {:question "Write a query that given a relation of [movie-title rating] and an actor name, find the movie titles and rating for whicg that actor has been in"
    :inputs [{:type :query
-             :value ""
-             :correct-value "[:find ?title ?rating\n :in $ ?name [[?title ?rating]]\n :where\n [?p :person/name ?name]\n [?m :movie/cast ?p]\n [?m :movie/title ?title]]"}
+             :value [:find ?title :in ... :where ...]
+             :correct-value [:find ?title ?rating 
+                             :in $ ?name [[?title ?rating]] 
+                             :where 
+                             [?p :person/name ?name] 
+                             [?m :movie/cast ?p] 
+                             [?m :movie/title ?title]]}
             {:type :value
              :value "\"Mel Gibson\""}
             {:type :value

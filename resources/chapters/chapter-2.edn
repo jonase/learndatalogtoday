@@ -3,18 +3,31 @@
  :exercises
  [{:question "Find movie titles made in 1985"
    :inputs [{:type :query
-             :value ""
-             :correct-value "[:find ?title :where [?m :movie/title ?title] [?m :movie/year 1985]]"}]}
+             :value [:find ?title :where ...]
+             :correct-value [:find ?title 
+                             :where 
+                             [?m :movie/title ?title] 
+                             [?m :movie/year 1985]]}]}
+
   {:question "What year was \"Alien\" released?"
    :inputs [{:type :query
-             :value ""
-             :correct-value "[:find ?year :where [?m :movie/title \"Alien\"] [?m :movie/year ?year]]"}]}
+             :value [:find ?year :where ...]
+             :correct-value [:find ?year 
+                             :where 
+                             [?m :movie/title "Alien"] 
+                             [?m :movie/year ?year]]}]}
+  
   {:question "Who directed RoboCop?"
    :inputs [{:type :query
-             :value ""
-             :correct-value "[:find ?name :where [?m :movie/title \"RoboCop\"] [?m :movie/director ?d] [?d :person/name ?name]]"}]}
+             :value [:find ?name :where ...]
+             :correct-value [:find ?name :where [?m :movie/title "RoboCop"] [?m :movie/director ?d] [?d :person/name ?name]]}]}
 
   {:question "Find directors who has directed Arnold Schwarzenegger"
    :inputs [{:type :query
-             :value ""
-             :correct-value "[:find ?name :where [?p :person/name \"Arnold Schwarzenegger\"] [?m :movie/cast ?p] [?m :movie/director ?d] [?d :person/name ?name]]"}]}]}
+             :value [:find ?name :where ...]
+             :correct-value [:find ?name 
+                             :where 
+                             [?p :person/name "Arnold Schwarzenegger"] 
+                             [?m :movie/cast ?p] 
+                             [?m :movie/director ?d] 
+                             [?d :person/name ?name]]}]}]}

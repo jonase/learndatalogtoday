@@ -3,16 +3,25 @@
  [{:question "What attributes are associated with a movie entity."
    :inputs 
    [{:type :query
-     :value "[:find ?attr\n :in $ ?title\n :where\n ...]"
-     :correct-value "[:find ?attr\n :in $ ?title\n :where\n [?m :movie/title ?title]\n [?m ?attr]]"}
+     :value [:find ?attr :in $ ?title :where ...]
+     :correct-value [:find ?attr 
+                     :in $ ?title 
+                     :where 
+                     [?m :movie/title ?title] 
+                     [?m ?attr]]}
     {:type :value
      :value "\"Commando\""}]}
   
   {:question "Find the names of all people associated with a particular movie (i.e. both the actors and the directors)"
    :inputs 
    [{:type :query
-     :value "[:find ?name\n :in $ ?title [?attr ...]\n :where\n ...]"
-     :correct-value "[:find ?name\n :in $ ?title [?attr ...]\n :where\n [?m :movie/title ?title]\n [?m ?attr ?p]\n [?p :person/name ?name]]"}
+     :value [:find ?name :in $ ?title [?attr ...] :where ...]
+     :correct-value [:find ?name 
+                     :in $ ?title [?attr ...] 
+                     :where 
+                     [?m :movie/title ?title] 
+                     [?m ?attr ?p] 
+                     [?p :person/name ?name]]}
     {:type :value
      :value "\"Die Hard\""}
     {:type :value
@@ -21,11 +30,20 @@
   {:question "Find all available attributes, their type and their cardinality."
    :inputs 
    [{:type :query
-     :value "[:find ?attr ?type ?card\n :where\n ...]"
-     :correct-value "[:find ?attr ?type ?card\n :where\n [_ :db.install/attribute ?a]\n [?a :db/valueType ?t]\n [?a :db/cardinality ?c]\n [?a :db/ident ?attr]\n [?t :db/ident ?type]\n [?c :db/ident ?card]]"}
-    ]}
+     :value [:find ?attr ?type ?card :where ...]
+     :correct-value [:find ?attr ?type ?card 
+                     :where 
+                     [_ :db.install/attribute ?a] 
+                     [?a :db/valueType ?t] 
+                     [?a :db/cardinality ?c] 
+                     [?a :db/ident ?attr] 
+                     [?t :db/ident ?type] 
+                     [?c :db/ident ?card]]}]}
 
   {:question "When was the seed data imported into the database?"
    :inputs [{:type :query
-             :value "[:find ?inst\n ...]"
-             :correct-value "[:find ?inst\n :where\n [_ :movie/title _ ?tx]\n [?tx :db/txInstant ?inst]]"}]}]}
+             :value [:find ?inst ...]
+             :correct-value [:find ?inst 
+                             :where 
+                             [_ :movie/title _ ?tx] 
+                             [?tx :db/txInstant ?inst]]}]}]}

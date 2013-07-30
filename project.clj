@@ -5,13 +5,13 @@
                  [compojure "1.1.5"]
                  [com.datomic/datomic-free "0.8.4020.26"]
                  [datomic-query-helpers "0.1.0"]
-                 [hiccup "1.0.3"]
-                 [markdown-clj "0.9.28"]
+                 [hiccup "1.0.4"]
+                 [markdown-clj "0.9.29"]
                  ;; cljs
                  [hylla "0.1.0-SNAPSHOT"]
                  [hiccups "0.2.0"]
                  [domina "1.0.1"]]
-  :plugins [[lein-ring "0.8.5"]
+  :plugins [[lein-ring "0.8.6"]
             [lein-cljsbuild "0.3.2"]]
   :source-paths ["src/clj"]
   :ring {:handler learndatalogtoday.handler/app}

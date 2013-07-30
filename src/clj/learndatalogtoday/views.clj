@@ -1,7 +1,8 @@
 (ns learndatalogtoday.views
   (:require [hiccup.page :refer [html5 include-js include-css]]
             [hiccup.element :refer [javascript-tag]]
-            [markdown.core :as md]))
+            [markdown.core :as md]
+            [datomic-query-helpers.core :refer [pretty-query-string]]))
 
 (defn footer []
   [:footer.text-center {:style "border-top: 1px solid lightgrey; margin-top: 40px;padding:10px;"}
@@ -32,7 +33,7 @@
      (row (when (> chapter 0) 
             [:a {:href (str "/chapter/" (dec chapter))} 
              "<< Previous chapter"])
-          (when (< chapter 10) 
+          (when (< chapter 9) 
             [:a.pull-right {:href (str "/chapter/" (inc chapter))} 
              "Next chapter >>"]))
      (row [:div.exercises {:style "margin-top: 14px"} exercises])
@@ -55,7 +56,10 @@
      [:div.row
       [:div.span8 [:p [:small [:strong label]]]]]
      [:div.row
-      [:div.span8 [:textarea {:class (str "input-" tab-n)} (:value input)]]]]))
+      [:div.span8 [:textarea {:class (str "input-" tab-n)} (if (= (:type input) :query) 
+                                                             (pretty-query-string (:value input))
+                                                             ;; TODO pretty-print
+                                                             (:value input))]]]]))
 
 (defn build-inputs [tab-n inputs]
   (map-indexed (partial build-input tab-n) inputs))

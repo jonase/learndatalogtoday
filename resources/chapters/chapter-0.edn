@@ -3,5 +3,7 @@
  :exercises [{:question "Find all movies titles in the database." 
               :hints []
               :inputs [{:type :query
-                        :value ""
-                        :correct-value "[:find ?title :where [_ :movie/title ?title]]"}]}]}
+                        :value [:find ...]
+                        :correct-value [:find ?title 
+                                        :where 
+                                        [_ :movie/title ?title]]}]}]}
