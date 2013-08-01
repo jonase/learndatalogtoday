@@ -1,6 +1,6 @@
 {:text-file "resources/chapters/chapter-4.md"
  :exercises 
- [{:question "What attributes are associated with a movie entity."
+ [{:question "What attributes are associated with a given movie."
    :inputs 
    [{:type :query
      :value [:find ?attr :in $ ?title :where ...]
@@ -8,7 +8,8 @@
                      :in $ ?title 
                      :where 
                      [?m :movie/title ?title] 
-                     [?m ?attr]]}
+                     [?m ?a]
+                     [?a :db/ident ?attr]]}
     {:type :value
      :value "\"Commando\""}]}
   
@@ -27,7 +28,7 @@
     {:type :value
      :value "[:movie/cast :movie/director]"}]}
 
-  {:question "Find all available attributes, their type and their cardinality."
+  {:question "Find all available attributes, their type and their cardinality. This is essentially a query to find **the schema of the database**. To find all installed attributes you must use the `:db.install/attribute` attribute. You will also need to use the `:db/valueType` and `:db/cardinality` attributes as well as `:db/ident`."
    :inputs 
    [{:type :query
      :value [:find ?attr ?type ?card :where ...]
@@ -40,9 +41,9 @@
                      [?t :db/ident ?type] 
                      [?c :db/ident ?card]]}]}
 
-  {:question "When was the seed data imported into the database?"
+  {:question "When was the seed data imported into the database? Grab the transaction of any datom in the database, e.g., `[_ :movie/title _ ?tx]` and work from there."
    :inputs [{:type :query
-             :value [:find ?inst ...]
+             :value [:find ?inst :where ...]
              :correct-value [:find ?inst 
                              :where 
                              [_ :movie/title _ ?tx] 

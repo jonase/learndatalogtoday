@@ -11,7 +11,7 @@ For example, say we want to find all attributes that are associated with person 
      [?p :person/name]
      [?p ?attr]]
 
-The above gives us a list of entity ids referring to the attributes. To get the actual keywords we need to look it up using the `:db/ident` attribute:
+The above query returns a set of entity ids referring to the attributes we are interested in. To get the actual keywords we need to look them up using the `:db/ident` attribute:
 
     [:find ?attr
      :where
@@ -21,10 +21,11 @@ The above gives us a list of entity ids referring to the attributes. To get the 
 
 ## Transactions
 
-It's also possible to run queries on transactions, such as
+It's also possible to run queries to find information about transactions, such as
 
 * When was a fact asserted?
 * What facts were part of a transaction?
+* When did this transaction run?
 * etc.
 
-The transaction entity is the fourth element in the datom vector. The only attribute associated with a transaction (by default) is `:db/txInstant` which is the instant in time of the assertion.
+The transaction entity is the fourth element in the datom vector. The only attribute associated with a transaction (by default) is `:db/txInstant` which is the instant in time when the transaction was committed to the database.

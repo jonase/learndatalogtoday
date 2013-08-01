@@ -11,8 +11,8 @@ Looking at the query
 It would be great if we could reuse the above query to find movie
 titles of any actor and not just "Sylvester Stallone". This is
 possible with an `:in` clause which provides the query with input
-parameters much in the same way as function or method arguments in
-your programming language. 
+parameters much in the same way that function or method arguments does
+in your programming language.
 
 Rewriting the above query to accept the name of any person:
 
@@ -25,13 +25,13 @@ Rewriting the above query to accept the name of any person:
 
 This query takes two arguments: `$` is the database itself (implicit,
 if no `:in` clause is specified) and `?name` which presumably will be
-the name of some actor. The above query could be executed like 
-`(q query db "Sylvester Stallone")` where `query` is the query above and
-`db` is a database value. It's possible to have any number of inputs
-to a query
+the name of some actor. The above query is executed like 
+`(q query db "Sylvester Stallone")` where `query` is the query above 
+and `db` is a database value. You can have any number of inputs to a 
+query.
 
 In the above query the input pattern variable `?name` is bound to a
-scalar (a string in our example). There are four different kinds of
+scalar (a string in our case). There are four different kinds of
 input: scalars, tuples, collections and relations.
 
 ## Tuples
@@ -50,6 +50,10 @@ as input to find all movies where these two people collaborated:
      [?m :movie/cast ?a]
      [?m :movie/title ?title]]
 
+Of course, in this case, you could just as well use two distinct inputs instead:
+
+    :in $ ?director ?actor
+
 ## Collections
 
 You can use collection destructuring to implement a kind of logical **or** in your query. Say, you want to find all movies directed by either James Cameron **or** Ridley Scott:
@@ -61,26 +65,34 @@ You can use collection destructuring to implement a kind of logical **or** in yo
      [?m :movie/director ?d]
      [?m :movie/title ?title]]
 
-This query could be called with `(q query db ["James Cameron" "Ridley Scott"])`.
+Here, the `?director` pattern variable is initially bound to both "James Cameron" and "Ridley Scott".
+
 
 ## Relations
 
-Say you have found some really interesting data on imdb:
+Relations (= a set of tuples) are the most interesting and powerful of
+input types since you can join external relations with the datoms in
+your database. As a simple example, let's consider a relation with
+tuples `[movie-title box-office-earnings]`:
 
     [
      ... 
-     ["Die Hard" 8.3]
-     ["Alien" 8.5] 
-     ["Lethal Weapon" 7.6]
-     ["Commando" 6.5]
+     ["Die Hard" 140700000]
+     ["Alien" 104931801] 
+     ["Lethal Weapon" 120207127]
+     ["Commando" 57491000]
      ...
     ]
 
-and you'd like to query this data and join it with data from the database. The following query finds the ratings for a given director:
+It's possible to use this data and the data in our database to find
+(for example) box office earnings for a particular director:
 
-    [:find ?rating
-     :in $ ?director [[?title ?rating]]
+    [:find ?title ?box-office
+     :in $ ?director [[?title ?box-office]]
      :where 
      [?p :person/name ?director]
      [?m :movie/director ?p]
      [?m :movie/title ?title]]
+
+Note in particular that the `?box-office` pattern variable does not
+appear in any of the data patterns in the `:where` clause.

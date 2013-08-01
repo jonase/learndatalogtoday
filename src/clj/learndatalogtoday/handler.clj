@@ -1,5 +1,6 @@
 (ns learndatalogtoday.handler
-  (:require [clojure.edn :as edn] 
+  (:require [tutorial.fns]
+            [clojure.edn :as edn] 
             [learndatalogtoday.views :as views]
             [compojure.core :refer [routes GET POST]]
             [compojure.handler :as handler]
@@ -7,11 +8,6 @@
             [datomic.api :as d]
             [hiccup.page :refer [html5]])
   (:import [java.util Date]))
-
-(defn age [^Date birthday ^Date today]
-  (quot (- (.getTime today)
-           (.getTime birthday))
-        (* 1000 60 60 24 365)))
 
 (defn edn-response [edn-data]
   {:status 200
@@ -22,7 +18,9 @@
 
 (defn app-routes [db chapters]
   (routes
-   (GET "/" [])
+   (GET "/" 
+     []
+     (views/toc))
    
    (GET ["/chapter/:n" :n #"[0-9]+"]
      [n]

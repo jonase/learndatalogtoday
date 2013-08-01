@@ -12,7 +12,7 @@
                              [?m :movie/title ?title]]}
             {:type :value
              :value "1988"}]}
-  {:question "Given a list of movie titles, list the title and the year that movie was released"
+  {:question "Given a list of movie titles, find the title and the year that movie was released."
    :inputs [{:type :query
              :value [:find ?title ?year :in ... :where ...]
              :correct-value [:find ?title ?year 
@@ -23,9 +23,9 @@
             {:type :value
              :value "[\"Lethal Weapon\" \"Lethal Weapon 2\" \"Lethal Weapon 3\"]"}]}
 
-  {:question "Write a query that given a relation of [movie-title rating] and an actor name, find the movie titles and rating for whicg that actor has been in"
+  {:question "Write a query that, given an actor name and a relation with movie-title/rating, finds the movie titles and corresponding rating for which that actor was a cast member."
    :inputs [{:type :query
-             :value [:find ?title :in ... :where ...]
+             :value [:find ?title ?rating :in ... :where ...]
              :correct-value [:find ?title ?rating 
                              :in $ ?name [[?title ?rating]] 
                              :where 

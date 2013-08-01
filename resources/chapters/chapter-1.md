@@ -1,10 +1,9 @@
 # Basic Queries
 
 The example database we'll use contains *movies* mostly, but not
-exclusively, from the 80s. There is information about movie titles,
+exclusively, from the 80s. You'll find information about movie titles,
 release year, directors, cast members etc. As the tutorial advances
-we'll learn more about the contents of the database and how that
-content is organized, i.e., the database schema.
+we'll learn more about the contents of the database and how it's organized.
 
 The data model in datomic is based around atomic facts called
 **datoms**. A datom is a 4-tuple consisting of

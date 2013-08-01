@@ -10,7 +10,7 @@
    :inputs
    [{:type :query
      :value [:find ... :where ...]
-     :correct-value [:find (count ?m) :where [?m :movie/title]]}]}
+     :correct-value [:find (min ?date) :where [_ :person/born ?date]]}]}
 
   {:question "Given a collection of actors and (the now familiar) ratings data. Find the avarage rating for each actor. The query should return the actor name and the `avg` rating."
    :inputs

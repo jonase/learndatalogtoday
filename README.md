@@ -1,19 +1,33 @@
 # learndatalogtoday
 
-FIXME
+An interactive datalog tutorial
 
 ## Prerequisites
 
-You will need [Leiningen][1] 1.7.0 or above installed.
+You will need [Leiningen](https://github.com/technomancy/leiningen) installed.
 
-[1]: https://github.com/technomancy/leiningen
+## Bootstrapping
 
-## Running
+    $ git clone git@github.com:jonase/learndatalogtoday.git
+    $ cd learndatalogtoday
+    $ ./fetch-js-deps
+    $ lein cljsbuild once
 
-To start a web server for the application, run:
+## Running the webapp
 
-    lein ring server
+    $ lein ring server
+
+A browser window should open, otherwise visit http://localhost:3000.
+
+## Feedback welcome
+
+You can open issues on the github issue tracker or you can email me
+(either via github or gmail) your suggestions/bugs/typos/feedback/etc.
+
+No pull requests at this point since I'm considering entering the
+[Lisp In Summer Projects](http://lispinsummerprojects.org) competition
+with this project.
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 Jonas Enlund

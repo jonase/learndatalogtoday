@@ -17,12 +17,12 @@
                              [?m :movie/title "Alien"] 
                              [?m :movie/year ?year]]}]}
   
-  {:question "Who directed RoboCop?"
+  {:question "Who directed RoboCop? You will need to use `[<movie-eid> :movie/director <person-eid>]` to find the director for a movie."
    :inputs [{:type :query
              :value [:find ?name :where ...]
              :correct-value [:find ?name :where [?m :movie/title "RoboCop"] [?m :movie/director ?d] [?d :person/name ?name]]}]}
 
-  {:question "Find directors who has directed Arnold Schwarzenegger"
+  {:question "Find directors who has directed Arnold Schwarzenegger in a movie."
    :inputs [{:type :query
              :value [:find ?name :where ...]
              :correct-value [:find ?name 

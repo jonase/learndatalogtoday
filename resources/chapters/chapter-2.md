@@ -25,9 +25,9 @@ performance) so the previous query could just as well have been written
 
 and the result set would have been exactly the same.
 
-Let's say we want to find out who starred in "Leathal Weapon". We
+Let's say we want to find out who starred in "Lethal Weapon". We
 will need three data patterns for this. The first one finds the
-entity-id of the movie with "Leathal Weapon" as the title:
+entity-id of the movie with "Lethal Weapon" as the title:
 
     [?m :movie/title "Lethal Weapon"]
 
@@ -37,7 +37,7 @@ pattern
     [?m :movie/cast ?p] 
 
 `?p` will now be (the entity id of) a person entity so we can grab the
-names with
+actual name with
 
     [?p :person/name ?name] 
 
