@@ -24,7 +24,7 @@
   [:html
    [:head
     (include-css "/third-party/bootstrap/css/bootstrap.css")
-    (include-css "/third-party/codemirror-3.14/lib/codemirror.css")
+    (include-css "/third-party/codemirror-3.15/lib/codemirror.css")
     (include-css "/style.css")
     [:title "Learn Datalog Today!"]]
    [:body
@@ -39,8 +39,8 @@
      (row [:div.exercises {:style "margin-top: 14px"} exercises])
      (row (footer))]
     (include-js "/third-party/jquery/jquery-1.10.1.min.js")
-    (include-js "/third-party/codemirror-3.14/lib/codemirror.js")
-    (include-js "/third-party/codemirror-3.14/mode/clojure/clojure.js")
+    (include-js "/third-party/codemirror-3.15/lib/codemirror.js")
+    (include-js "/third-party/codemirror-3.15/mode/clojure/clojure.js")
     (include-js "/third-party/bootstrap/js/bootstrap.js")
     (include-js "/third-party/pagedown/Markdown.Converter.js")
     (include-js "/app.js")
