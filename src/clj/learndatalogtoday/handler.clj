@@ -1,7 +1,8 @@
 (ns learndatalogtoday.handler
   (:require [tutorial.fns]
-            [clojure.edn :as edn] 
+            [clojure.edn :as edn]
             [learndatalogtoday.views :as views]
+            [datomic-query-helpers.core :refer [check-query normalize]]
             [compojure.core :refer [routes GET POST]]
             [compojure.handler :as handler]
             [compojure.route :as route]
@@ -15,6 +16,14 @@
    :body (pr-str edn-data)})
 
 (declare read-chapter read-chapter-data)
+
+(def whitelist '#{< > <= >= not= = tutorial.fns/age .getDate .getMonth})
+
+(defn validate [[query & args]]
+  (let [syms (check-query query args whitelist)]
+    (if (empty? syms)
+      (cons (normalize query) args)
+      (throw (ex-info (str "Bad query input: " syms) {:syms syms})))))
 
 (defn app-routes [db chapters]
   (routes
@@ -37,12 +46,10 @@
              usr-input (edn/read-string data)
              ;;   Prod (get-in chapter-data [chapter :exercises exercise :inputs])
              ans-input (get-in (read-chapter-data chapter) [:exercises exercise :inputs])
-             [ans-query & ans-args] (map #(or (:correct-value %1) %2) ans-input usr-input)
-             [usr-query & usr-args] (edn/read-string data)
+             [ans-query & ans-args] (validate (map #(or (:correct-value %1) %2) ans-input usr-input))
+             [usr-query & usr-args] (validate (edn/read-string data))
              usr-result (apply d/q usr-query db usr-args)
              ans-result (apply d/q ans-query db ans-args)]
-         (println "ans-query" ans-query)
-         (println "usr-query" usr-query)
          (if (= usr-result ans-result)
            (edn-response {:status :success
                           :result usr-result})

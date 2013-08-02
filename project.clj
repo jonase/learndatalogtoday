@@ -4,7 +4,7 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [compojure "1.1.5"]
                  [com.datomic/datomic-free "0.8.4111"]
-                 [datomic-query-helpers "0.1.0"]
+                 [datomic-query-helpers "0.1.1"]
                  [hiccup "1.0.4"]
                  [markdown-clj "0.9.29"]
                  [fipp "0.4.0"]
