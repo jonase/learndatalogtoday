@@ -11,7 +11,7 @@
                      [?m ?a]
                      [?a :db/ident ?attr]]}
     {:type :value
-     :value "\"Commando\""}]}
+     :value "Commando"}]}
   
   {:question "Find the names of all people associated with a particular movie (i.e. both the actors and the directors)"
    :inputs 
@@ -24,9 +24,9 @@
                      [?m ?attr ?p] 
                      [?p :person/name ?name]]}
     {:type :value
-     :value "\"Die Hard\""}
+     :value "Die Hard"}
     {:type :value
-     :value "[:movie/cast :movie/director]"}]}
+     :value [:movie/cast :movie/director]}]}
 
   {:question "Find all available attributes, their type and their cardinality. This is essentially a query to find **the schema of the database**. To find all installed attributes you must use the `:db.install/attribute` attribute. You will also need to use the `:db/valueType` and `:db/cardinality` attributes as well as `:db/ident`."
    :inputs 

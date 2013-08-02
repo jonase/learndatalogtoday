@@ -2,7 +2,8 @@
   (:require [hiccup.page :refer [html5 include-js include-css]]
             [hiccup.element :refer [javascript-tag]]
             [markdown.core :as md]
-            [datomic-query-helpers.core :refer [pretty-query-string]]))
+            [datomic-query-helpers.core :refer [pretty-query-string]]
+            [fipp.edn :as fipp]))
 
 (defn footer []
   [:footer.text-center {:style "border-top: 1px solid lightgrey; margin-top: 40px;padding:10px;"}
@@ -59,7 +60,8 @@
       [:div.span8 [:textarea {:class (str "input-" tab-n)} (if (= (:type input) :query) 
                                                              (pretty-query-string (:value input))
                                                              ;; TODO pretty-print
-                                                             (:value input))]]]]))
+                                                             (with-out-str
+                                                               (fipp/pprint (:value input))))]]]]))
 
 (defn build-inputs [tab-n inputs]
   (map-indexed (partial build-input tab-n) inputs))

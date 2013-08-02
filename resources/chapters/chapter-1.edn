@@ -8,15 +8,11 @@
                         :correct-value [:find ?e :where [?e :movie/year 1987]]}]}
              
              {:question "Find the entity-id **and** titles of movies in the database"
-              :hints ["You'll need two pattern variables in the find clause"
-                      "Something like `[:find ?e ?title :where ...]` should get you started"
-                      "Try `[:find ?e ?title :where [?e :movie/title ?title]]`"]
               :inputs [{:type :query
-                        :value "[:find ?e ?title\n :where\n ...]"
-                        :correct-value "[:find ?e ?title\n :where\n [?e :movie/title ?title]]"}]}
+                        :value [:find ?e ?title :where ...]
+                        :correct-value [:find ?e ?title :where [?e :movie/title ?title]]}]}
 
              {:question "Find the name of all people in the database"
-              :hints ["You'll need to use `:person/name` attribute"]
               :inputs [{:type :query
                         :value [:find]
                         :correct-value [:find ?name 

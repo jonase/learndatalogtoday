@@ -7,6 +7,7 @@
                  [datomic-query-helpers "0.1.0"]
                  [hiccup "1.0.4"]
                  [markdown-clj "0.9.29"]
+                 [fipp "0.4.0"]
                  ;; cljs
                  [hylla "0.1.0"]
                  [hiccups "0.2.0"]
