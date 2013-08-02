@@ -17,7 +17,8 @@
 
 (declare read-chapter read-chapter-data)
 
-(def whitelist '#{< > <= >= not= = tutorial.fns/age .getDate .getMonth})
+(def whitelist '#{< > <= >= not= = tutorial.fns/age .getDate .getMonth
+                  movie-year sequels friends avg min max sum})
 
 (defn validate [[query & args]]
   (let [syms (check-query query args whitelist)]

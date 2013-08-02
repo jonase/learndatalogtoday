@@ -1,1 +1,92 @@
-{:text-file "resources/chapters/chapter-8.md"}
+{:text-file "resources/chapters/chapter-8.md"
+ :exercises 
+ [{:question "Write a rule `[movie-year ?title ?year]` where `?title` is the title of some movie and `?year` is that movies release year."
+   :inputs
+   [{:type :query
+     :value [:find ?title :in $ % :where [movie-year ?title 1991]]}
+    {:type :rule
+     :value [[[movie-year ?title ?year] ...]]
+     :correct-value [[[movie-year ?title ?year] 
+                      [?m :movie/title ?title]
+                      [?m :movie/year ?year]]]}]}
+  
+  {:question "Two people are friends if they have worked together in a movie. Write a rule `[friends ?p1 ?p2]` where `p1` and `p2` are person entities. Try with a few different `?name` inputs to make sure you got it right. There might be some edge cases here."
+   :inputs
+   [{:type :query
+     :value [:find ?friend
+             :in $ % ?name
+             :where 
+             [?p1 :person/name ?name]
+             [friends ?p1 ?p2]
+             [?p2 :person/name ?friend]]}
+    {:type :rule
+     :value [[[friends ?p1 ?p2]
+              ...]]
+     :correct-value [[[friends ?p1 ?p2]
+                      [?m :movie/cast ?p1]
+                      [?m :movie/cast ?p2]]
+                     [[friends ?p1 ?p2]
+                      [?m :movie/cast ?p1]
+                      [?m :movie/director ?p2]]
+                     [[friends ?p1 ?p2]
+                      [friends ?p2 ?p1]]]}
+    {:type :value
+     :value "James Cameron"}
+    ]}
+
+  {:question "Write a rule `[sequels ?m1 ?m2]` where `?m1` and `?m2` are movie entities. You'll need to use the attribute `:movie/sequel`. To implement this rule correctly you can think of the problem like this: A movie `?m2` is a sequel of `?m1` if either 
+* `?m2` is the \"direct\" sequel of `m1` **or** 
+* `?m2` is the sequel of some movie `?m` **and** that movie `?m` is the sequel to `?m1`.
+
+There are (at least) three different ways to write the above query. Try to find all three solutions."
+   :inputs
+   [{:type :query
+     :value [:find ?sequel
+             :in $ % ?title
+             :where 
+             [?m :movie/title ?title]
+             [sequels ?m ?s]
+             [?s :movie/title ?sequel]]}
+    {:type :rule
+     :value [[[sequels ?m1 ?m2] ...]]}
+    {:type :value
+     :value "Mad Max"}
+    ]}
+
+  {:question ""
+   :inputs
+   [{:type :query
+     :value [:find ?sequel
+             :in $ % ?title
+             :where 
+             [?m :movie/title ?title]
+             [sequels ?m ?s]
+             [?s :movie/title ?sequel]]}
+    {:type :rule
+     :value [[[sequels ?m1 ?m2] ...]]}
+    {:type :value
+     :value ["Mad Max" "Lethal Weapon" "The Terminator" "Predator"]}
+    {:type :value
+   :value [["Die Hard" 8.3] 
+           ["Alien" 8.5]
+           ["Lethal Weapon" 7.6]
+           ["Commando" 6.5]
+           ["Mad Max Beyond Thunderdome" 6.1] 
+           ["Mad Max 2" 7.6]
+           ["Rambo: First Blood Part II" 6.2]
+           ["Braveheart" 8.4]
+           ["Terminator 2: Judgment Day" 8.6] 
+           ["Predator 2" 6.1]
+           ["First Blood" 7.6]
+           ["Aliens" 8.5]
+           ["Terminator 3: Rise of the Machines" 6.4]
+           ["Rambo III" 5.4]
+           ["Mad Max" 7.0]
+           ["The Terminator" 8.1] 
+           ["Lethal Weapon 2" 7.1]
+           ["Predator" 7.8]
+           ["Lethal Weapon 3" 6.6]
+           ["RoboCop" 7.5]]}
+  ]}
+  
+]}
