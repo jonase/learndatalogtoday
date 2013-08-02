@@ -15,7 +15,7 @@
             {:type :value
              :value "63"}
             {:type :value
-             :value "#inst \"2013-07-21T00:00:00.000-00:00\""}]}
+             :value "#inst \"2013-08-02\""}]}
   
   {:question "Find people younger than Bruce Willis and their ages."
    :inputs [{:type :query

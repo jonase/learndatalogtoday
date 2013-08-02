@@ -15,6 +15,7 @@ Edn consists of
 * Symbols: `max`, `+`, `?title`
 * Vectors: `[1 2 3]` `[:find ?foo ...]`
 * Lists: `(3.14 :foo [:bar :baz])`, `(+ 1 2 3 4)`
+* Instants: `#inst "2013-02-26"`
 * .. and a few other things which we will not need in this tutorial.
 
 Here is an example query that finds all movie titles in our example database:

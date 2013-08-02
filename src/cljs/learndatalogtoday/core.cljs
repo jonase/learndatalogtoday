@@ -1,5 +1,5 @@
 (ns learndatalogtoday.core
-  (:require [cljs.reader :refer [read-string]]
+  (:require [learndatalogtoday.reader :refer [read-string]]
             [datomic-query-helpers.core :refer [normalize]]
             [hylla.remote :as remote] 
             [domina :refer [by-id nodes]]
