@@ -43,9 +43,7 @@
     (include-js "/third-party/codemirror-3.15/lib/codemirror.js")
     (include-js "/third-party/codemirror-3.15/mode/clojure/clojure.js")
     (include-js "/third-party/bootstrap/js/bootstrap.js")
-    (include-js "/third-party/pagedown/Markdown.Converter.js")
     (include-js "/app.js")
-    (javascript-tag "goog.require('learndatalogtoday.core')")
     (javascript-tag (format "learndatalogtoday.core.init(%s, %s);" chapter ecount))]])
 
 (defn build-input [tab-n input-n input]

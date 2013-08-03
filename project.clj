@@ -20,7 +20,12 @@
   :cljsbuild {
     :builds [{
         :source-paths ["src/cljs"]
-        :compiler {
-          :output-to "resources/public/app.js"  
-          :optimizations :whitespace
-          :pretty-print true}}]})
+        :compiler {:output-to "resources/public/app.js"  
+                   :optimizations :advanced
+                   :externs ["externs.js"]
+                   :static-fns true}
+
+              #_{
+                 :output-to "resources/public/app.js"  
+                 :optimizations :whitespace
+                 :pretty-print true}}]})

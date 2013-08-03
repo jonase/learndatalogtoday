@@ -54,7 +54,7 @@
                        {:status :error 
                         :message (.-message e)})))))
 
-(defn init [chapter ecount]
+(defn ^:export init [chapter ecount]
   (doseq [n (range ecount)]
     (let [button-id (str "#run-query-" n)
           input-class (str ".input-" n)
