@@ -8,13 +8,11 @@
 (defn footer []
   [:footer.text-center {:style "border-top: 1px solid lightgrey; margin-top: 40px;padding:10px;"}
    [:small
-    [:p [:a {:href "#"} "learndatalogtoday.org"] 
+    [:p [:a {:href "http://learndatalogtoday.org"} "learndatalogtoday.org"] 
      " &copy; 2013 Jonas Enlund"]
     [:p 
-     [:a {:href "#"} "github"] " | " 
-     [:a {:href "#"} "lispinsummerprojects.org"] " | " 
-     [:a {:href "#"} "about"] " | "
-     [:a {:href "#"} "license"]]]])
+     [:a {:href "https://github.com/jonase/learndatalogtoday"} "github"] " | " 
+     [:a {:href "http://lispinsummerprojects.org/"} "lispinsummerprojects.org"]]]])
 
 (defn row [& content]
   [:div.row
@@ -115,20 +113,7 @@
     [:body
      [:div.container
       (row [:div.textcontent 
-            [:h1 "Learn Datalog Today!"]
-            [:p "<strong>Learn Datalog Today</strong> is an interactive tutorial designed to teach you the <a href=\"\">datomic</a>  dialect of <a href=\"\">datalog</a>. Datalog is a declarative <strong>database query language</strong> with roots in logic programming. Datalog has similar expressive power as <a href=\"\">SQL</a>."]
-            [:p "Datomic is a new database with an interesting and novel architecture giving its users a unique set of features. You can read more about datomic at <a href=\"http://datomic.com\">http://datomic.com</a> and the architecture is described in some detail <a href=\"http://infoq.com\">in this infoq article</a>."]
-            [:h2 "Table of Content"]
-            [:ul
-             [:li [:a {:href "/chapter/0"} "Extensible Data Notation"]]
-             [:li [:a {:href "/chapter/1"} "Basic Queries"]]
-             [:li [:a {:href "/chapter/2"} "Data Patterns"]]
-             [:li [:a {:href "/chapter/3"} "Parameterized queries"]]
-             [:li [:a {:href "/chapter/4"} "More Queries"]]
-             [:li [:a {:href "/chapter/5"} "Predicates"]]
-             [:li [:a {:href "/chapter/6"} "Transformation Functions"]]
-             [:li [:a {:href "/chapter/7"} "Aggregates"]]
-             [:li [:a {:href "/chapter/8"} "Rules"]]]])
+            (-> "resources/toc.md" slurp md/md-to-html-string)])
       (row (footer))]
      (include-js "/third-party/jquery/jquery-1.10.1.min.js")
      (include-js "/third-party/bootstrap/js/bootstrap.js")]]))
