@@ -25,7 +25,9 @@
   (let [syms (check-query query args whitelist)]
     (if (empty? syms)
       (cons (normalize query) args)
-      (throw (ex-info (str "Bad query input: " syms) {:syms syms})))))
+      (throw (ex-info (str "Non-whitelist symbol used in query/args: " syms 
+                           ". The symbol whitelist is " whitelist) 
+                      {:syms syms})))))
 
 (defn app-routes [db chapters]
   (routes
