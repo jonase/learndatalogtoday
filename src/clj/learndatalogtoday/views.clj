@@ -50,16 +50,16 @@
   (let [label (condp = (:type input)
                 :query "Query:"
                 :rule "Rules:"
-                :value (str "Input #" input-n ":"))]
+                :value (str "Input #" input-n ":"))
+        input-str (condp = (:type input)
+                    :query (pretty-query-string (:value input))
+                    :rule (with-out-str (fipp/pprint (:value input)))
+                    :value (with-out-str (fipp/pprint (:value input))))]
     [:div.span8
      [:div.row
       [:div.span8 [:p [:small [:strong label]]]]]
      [:div.row
-      [:div.span8 [:textarea {:class (str "input-" tab-n)} (if (= (:type input) :query) 
-                                                             (pretty-query-string (:value input))
-                                                             ;; TODO pretty-print
-                                                             (with-out-str
-                                                               (fipp/pprint (:value input))))]]]]))
+      [:div.span8 [:textarea {:class (str "input-" tab-n)} input-str]]]]))
 
 (defn build-inputs [tab-n inputs]
   (map-indexed (partial build-input tab-n) inputs))
@@ -67,7 +67,12 @@
 (defn build-exercise [tab-n exercise]
   (list [:div {:class (if (zero? tab-n) "tab-pane active" "tab-pane") 
                :id (str "tab" tab-n)}
+         
          (md/md-to-html-string (:question exercise))
+         [:div.row 
+          [:div.span8
+           [:small.pull-right "[ " [:a {:href "#" :class (str "show-ans-" tab-n)} "I give up!"] " ]"]]]
+
          [:div.row.inputs
           (build-inputs tab-n (:inputs exercise))]
          [:div.row

@@ -2,11 +2,12 @@
   (:require [tutorial.fns]
             [clojure.edn :as edn]
             [learndatalogtoday.views :as views]
-            [datomic-query-helpers.core :refer [check-query normalize]]
+            [datomic-query-helpers.core :refer [check-query normalize pretty-query-string]]
             [compojure.core :refer [routes GET POST]]
             [compojure.handler :as handler]
             [compojure.route :as route]
             [datomic.api :as d]
+            [fipp.edn :as fipp]
             [hiccup.page :refer [html5]])
   (:import [java.util Date]))
 
@@ -18,7 +19,7 @@
 (declare read-chapter read-chapter-data)
 
 (def whitelist '#{< > <= >= not= = tutorial.fns/age .getDate .getMonth
-                  movie-year sequels friends avg min max sum})
+                  movie-year sequels friends avg min max sum count})
 
 (defn validate [[query & args]]
   (let [syms (check-query query args whitelist)]
@@ -60,6 +61,24 @@
        (catch Exception e
          (edn-response {:status :error
                         :message (.getMessage e)}))))
+
+   (GET ["/answer/:chapter/:exercise" :chapter #"[0-9]+" :exercise #"[0-9]+"]
+     [chapter exercise]
+     (try 
+       (let [chapter (Integer/parseInt chapter)
+             exercise (Integer/parseInt exercise)
+             ;;   Prod (get-in chapter-data [chapter :exercises exercise :inputs])
+             ans-input (get-in (read-chapter-data chapter) [:exercises exercise :inputs])
+             value #(or (:correct-value %) (:value %))
+             answer (map (fn [input]
+                           (condp = (:type input)
+                             :query (pretty-query-string (value input))
+                             :rule (with-out-str
+                                     (fipp/pprint (value input)))
+                             :value (with-out-str 
+                                      (fipp/pprint (value input)))))
+                         ans-input)]
+         (edn-response answer))))
    
    (route/resources "/")
    (route/not-found "Not Found")))

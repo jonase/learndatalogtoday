@@ -4,7 +4,7 @@
             [hylla.remote :as remote] 
             [domina :refer [by-id nodes]]
             [domina.css :refer [sel]]
-            [domina.events :refer [listen!]]
+            [domina.events :refer [listen! prevent-default]]
             [hiccups.runtime :refer [render-html]]))
 
 (defn find-clause [q]
@@ -54,12 +54,21 @@
                        {:status :error 
                         :message (.-message e)})))))
 
+(defn show-ans-fn [chapter exercise editors]
+  (fn [e]
+    (prevent-default e)
+    (remote/get (format "/answer/%s/%s" chapter exercise)
+                nil
+                (fn [ans] 
+                  (mapv #(.setValue %1 %2) editors ans)))))
+
 (defn ^:export init [chapter ecount]
   (doseq [n (range ecount)]
     (let [button-id (str "#run-query-" n)
           input-class (str ".input-" n)
           editors (mapv #(.fromTextArea js/CodeMirror %)
-                        (nodes (sel input-class)))]
+                        (nodes (sel input-class)))
+          show-answer-class (str ".show-ans-" n)]
       
       ;; Need to refresh the codemirror editors when tab is shown. I'd
       ;; rather do this with domina but "shown" is a bootstrap
@@ -69,4 +78,7 @@
            (fn [e] (mapv #(.refresh %) editors)))
 
       (listen! (sel button-id) :click
-               (run-query-fn chapter n editors)))))
+               (run-query-fn chapter n editors))
+      
+      (listen! (sel show-answer-class)  :click
+               (show-ans-fn chapter n editors)))))
