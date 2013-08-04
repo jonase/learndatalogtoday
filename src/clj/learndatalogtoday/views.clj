@@ -55,7 +55,9 @@
                     :value (with-out-str (fipp/pprint (:value input))))]
     [:div.span8
      [:div.row
-      [:div.span8 [:p [:small [:strong label]]]]]
+      [:div.span8 [:p [:small [:strong label] 
+                       (when (= :query (:type input))
+                         [:span.pull-right "[ " [:a {:href "#" :class (str "show-ans-" tab-n)} "I give up!"] " ]"])]]]]
      [:div.row
       [:div.span8 [:textarea {:class (str "input-" tab-n)} input-str]]]]))
 
@@ -67,10 +69,6 @@
                :id (str "tab" tab-n)}
          
          (md/md-to-html-string (:question exercise))
-         [:div.row 
-          [:div.span8
-           [:small.pull-right "[ " [:a {:href "#" :class (str "show-ans-" tab-n)} "I give up!"] " ]"]]]
-
          [:div.row.inputs
           (build-inputs tab-n (:inputs exercise))]
          [:div.row
