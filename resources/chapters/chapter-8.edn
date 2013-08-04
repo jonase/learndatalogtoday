@@ -48,45 +48,11 @@ There are (at least) three different ways to write the above query. Try to find 
              [sequels ?m ?s]
              [?s :movie/title ?sequel]]}
     {:type :rule
-     :value [[[sequels ?m1 ?m2] ...]]}
+     :value [[[sequels ?m1 ?m2] ...]]
+     :correct-value [[[sequels ?m1 ?m2]
+                      [?m1 :movie/sequel ?m2]]
+                     [[sequels ?m1 ?m2]
+                      [?m :movie/sequel ?m2]
+                      [sequels ?m1 ?m]]]}
     {:type :value
-     :value "Mad Max"}
-    ]}
-
-  {:question ""
-   :inputs
-   [{:type :query
-     :value [:find ?sequel
-             :in $ % ?title
-             :where 
-             [?m :movie/title ?title]
-             [sequels ?m ?s]
-             [?s :movie/title ?sequel]]}
-    {:type :rule
-     :value [[[sequels ?m1 ?m2] ...]]}
-    {:type :value
-     :value ["Mad Max" "Lethal Weapon" "The Terminator" "Predator"]}
-    {:type :value
-   :value [["Die Hard" 8.3] 
-           ["Alien" 8.5]
-           ["Lethal Weapon" 7.6]
-           ["Commando" 6.5]
-           ["Mad Max Beyond Thunderdome" 6.1] 
-           ["Mad Max 2" 7.6]
-           ["Rambo: First Blood Part II" 6.2]
-           ["Braveheart" 8.4]
-           ["Terminator 2: Judgment Day" 8.6] 
-           ["Predator 2" 6.1]
-           ["First Blood" 7.6]
-           ["Aliens" 8.5]
-           ["Terminator 3: Rise of the Machines" 6.4]
-           ["Rambo III" 5.4]
-           ["Mad Max" 7.0]
-           ["The Terminator" 8.1] 
-           ["Lethal Weapon 2" 7.1]
-           ["Predator" 7.8]
-           ["Lethal Weapon 3" 6.6]
-           ["RoboCop" 7.5]]}
-  ]}
-  
-]}
+     :value "Mad Max"}]}]}
