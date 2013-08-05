@@ -2,6 +2,7 @@
   (:require [tutorial.fns]
             [clojure.edn :as edn]
             [learndatalogtoday.views :as views]
+            [taoensso.timbre :as log]
             [datomic-query-helpers.core :refer [check-query normalize pretty-query-string]]
             [compojure.core :refer [routes GET POST]]
             [compojure.handler :as handler]
@@ -55,14 +56,18 @@
              usr-result (apply d/q usr-query db usr-args)
              ans-result (apply d/q ans-query db ans-args)]
          (if (= usr-result ans-result)
-           (edn-response {:status :success
-                          :result usr-result})
-           (edn-response {:status :fail
-                          :result usr-result
-                          :correct-result ans-result})))
+           (do (log/info (format "Success query [%s,%s]: %s" chapter exercise (pr-str usr-input))) 
+               (edn-response {:status :success
+                              :result usr-result}))
+           (do (log/info (format "Fail query [%s,%s]: %s" chapter exercise (pr-str usr-input))) 
+               (edn-response {:status :fail
+                              :result usr-result
+                              :correct-result ans-result}))))
        (catch Exception e
-         (edn-response {:status :error
-                        :message (.getMessage e)}))))
+         (let [msg (.getMessage e)]
+           (log/info (format "Error query [%s,%s]. Data: %s Message: %s" chapter exercise data msg)) 
+           (edn-response {:status :error
+                          :message (.getMessage e)})))))
 
    (GET ["/answer/:chapter/:exercise" :chapter #"[0-9]+" :exercise #"[0-9]+"]
      [chapter exercise]
@@ -80,7 +85,8 @@
                              :value (with-out-str 
                                       (fipp/pprint (value input)))))
                          ans-input)]
-         (edn-response answer))))
+         (do (log/info "Answer request [%s,%s]: %s" chapter exercise answer)
+             (edn-response answer)))))
    
    (route/resources "/")
    (route/not-found "Not Found")))
