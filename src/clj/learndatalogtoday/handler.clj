@@ -85,7 +85,7 @@
                              :value (with-out-str 
                                       (fipp/pprint (value input)))))
                          ans-input)]
-         (do (log/info (format "Answer request [%s,%s]: %s" chapter exercise answer))
+         (do (log/info (format "Answer request [%s,%s]: %s" chapter exercise (seq answer)))
              (edn-response answer)))))
    
    (route/resources "/")
