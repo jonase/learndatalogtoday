@@ -7,7 +7,7 @@
 
 * Chapter 1: Basic Queries
   - About the example database
-  - The datalog data model
+  - The Datalog data model
   - Queries as edn data
   - Example query
   - Wildcard pattern / elide values on right

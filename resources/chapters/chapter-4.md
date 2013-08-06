@@ -4,7 +4,7 @@ A datom, as described earlier, is the 4-tuple `[eid attr val tx]`. So far, we ha
 
 ## Attributes 
 
-For example, say we want to find all attributes that are associated with person entities in our database. We know for certain that `:person/name` is one such attribute but are there others we have not yet seen?
+For example, say we want to find all attributes that are associated with person entities in our database. We know for certain that `:person/name` is one such attribute, but are there others we have not yet seen?
 
     [:find ?attr
      :where 
@@ -19,13 +19,23 @@ The above query returns a set of entity ids referring to the attributes we are i
      [?p ?a]
      [?a :db/ident ?attr]]
 
+This is because attributes are also entites in our database!
+
 ## Transactions
 
-It's also possible to run queries to find information about transactions, such as
+It's also possible to run queries to find information about transactions, such as:
 
 * When was a fact asserted?
-* What facts were part of a transaction?
-* When did this transaction run?
-* etc.
+* When was a fact retracted?
+* Which facts were part of a transaction?
+* Etc.
 
 The transaction entity is the fourth element in the datom vector. The only attribute associated with a transaction (by default) is `:db/txInstant` which is the instant in time when the transaction was committed to the database.
+
+Here's how we use the fourth element to find the time that "James Cameron" was set as the name for that person entity:
+
+    [:find ?timestamp
+     :where
+     [?p :person/name "James Cameron" ?tx]
+     [?tx :db/txInstant ?timestamp]]
+     

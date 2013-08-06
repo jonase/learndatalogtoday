@@ -1,6 +1,6 @@
 # Parameterized queries
 
-Looking at the query
+Looking at this query:
 
     [:find ?title
      :where 
@@ -8,13 +8,13 @@ Looking at the query
      [?m :movie/cast ?p]
      [?m :movie/title ?title]]
 
-It would be great if we could reuse the above query to find movie
-titles of any actor and not just "Sylvester Stallone". This is
-possible with an `:in` clause which provides the query with input
-parameters much in the same way that function or method arguments does
+It would be great if we could reuse this query to find movie
+titles for any actor and not just for "Sylvester Stallone". This is
+possible with an `:in` clause, which provides the query with input
+parameters, much in the same way that function or method arguments does
 in your programming language.
 
-Rewriting the above query to accept the name of any person:
+Here's that query with an input parameter for the actor:
 
     [:find ?title
      :in $ ?name
@@ -25,14 +25,33 @@ Rewriting the above query to accept the name of any person:
 
 This query takes two arguments: `$` is the database itself (implicit,
 if no `:in` clause is specified) and `?name` which presumably will be
-the name of some actor. The above query is executed like 
-`(q query db "Sylvester Stallone")` where `query` is the query above 
-and `db` is a database value. You can have any number of inputs to a 
-query.
+the name of some actor.
 
-In the above query the input pattern variable `?name` is bound to a
-scalar (a string in our case). There are four different kinds of
+The above query is executed like `(q query db "Sylvester Stallone")`,
+where `query` is the query we just saw, and `db` is a database value. 
+You can have any number of inputs to a query.
+
+In the above query, the input pattern variable `?name` is bound to a
+scalar - a string in this case. There are four different kinds of
 input: scalars, tuples, collections and relations.
+
+## A quick aside
+
+Hold on. Where does that `$` get used? In query, each of these data 
+patterns is actually a **5 tuple**, of the form:
+
+    [<database> <entity-id> <attribute> <value> <transaction-id>]
+
+It's just that the `database` part is implicit, much like the first
+parameter in the `:in` clause. This query is functionally identical
+to the previous one:
+
+    [:find ?title
+     :in $ ?name
+     :where 
+     [$ ?p :person/name ?name]
+     [$ ?m :movie/cast ?p]
+     [$ ?m :movie/title ?title]]
 
 ## Tuples
 
@@ -56,7 +75,7 @@ Of course, in this case, you could just as well use two distinct inputs instead:
 
 ## Collections
 
-You can use collection destructuring to implement a kind of logical **or** in your query. Say, you want to find all movies directed by either James Cameron **or** Ridley Scott:
+You can use collection destructuring to implement a kind of logical **or** in your query. Say you want to find all movies directed by either James Cameron **or** Ridley Scott:
 
     [:find ?title
      :in $ [?director ...]
@@ -67,13 +86,13 @@ You can use collection destructuring to implement a kind of logical **or** in yo
 
 Here, the `?director` pattern variable is initially bound to both "James Cameron" and "Ridley Scott".
 
-
 ## Relations
 
-Relations (= a set of tuples) are the most interesting and powerful of
-input types since you can join external relations with the datoms in
-your database. As a simple example, let's consider a relation with
-tuples `[movie-title box-office-earnings]`:
+Relations - a set of tuples - are the most interesting and powerful of
+input types, since you can join external relations with the datoms in
+your database.
+
+As a simple example, let's consider a relation with tuples `[movie-title box-office-earnings]`:
 
     [
      ... 
@@ -84,8 +103,8 @@ tuples `[movie-title box-office-earnings]`:
      ...
     ]
 
-It's possible to use this data and the data in our database to find
-(for example) box office earnings for a particular director:
+Let's use this data and the data in our database to find
+box office earnings for a particular director:
 
     [:find ?title ?box-office
      :in $ ?director [[?title ?box-office]]
@@ -94,5 +113,5 @@ It's possible to use this data and the data in our database to find
      [?m :movie/director ?p]
      [?m :movie/title ?title]]
 
-Note in particular that the `?box-office` pattern variable does not
+Note that the `?box-office` pattern variable does not
 appear in any of the data patterns in the `:where` clause.

@@ -4,7 +4,7 @@
 or methods which can be used in queries to transform values and bind
 their results to pattern variables. Say, for example, there exists an
 attribute `:person/birth` with type `:db.type/instant`. Given the
-birthday it's easy to calculate the (very approximate) age of a
+birthday, it's easy to calculate the (very approximate) age of a
 person:
 
     (defn age [birthday today]
@@ -12,7 +12,7 @@ person:
                (.getTime birthday))
             (* 1000 60 60 24 365)))
 
-with this function in hand we can now calculate the age of a person **inside the query itself**:
+with this function, we can now calculate the age of a person **inside the query itself**:
 
     [:find ?age
      :in $ ?person ?today
@@ -36,6 +36,3 @@ instead, you must bind intermediate results in temporary pattern variables
 
     [(g ?x) ?t]
     [(f ?t) ?a]
-
-
-
