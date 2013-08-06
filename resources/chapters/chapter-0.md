@@ -1,13 +1,13 @@
 # Extensible Data Notation
 
-In datomic, a datalog query is written in
-[extensible data notation (edn)](http://edn-format.org). Edn is a data format similar to JSON but:
+In Datomic, a Datalog query is written in
+[extensible data notation (edn)](http://edn-format.org). Edn is a data format similar to JSON, but it:
 
 * is extensible with user defined value types,
 * has more base types,
-* is a subset of [Clojure] (http://clojure.org) data.
+* is a subset of [Clojure](http://clojure.org) data.
 
-Edn consists of
+Edn consists of:
 
 * Numbers: `42`, `3.14159`
 * Strings: `"This is a string"`
@@ -31,6 +31,6 @@ Note that the query is a vector with four elements:
 * the keyword `:where`
 * the vector `[_ :movie/title ?title]`
 
-We'll go over the specific parts of the query later but for now you 
+We'll go over the specific parts of the query later, but for now you 
 should simply type the above query verbatim into the textbox below,
-press **Run Query** and continue to the next part of the tutorial.
+press **Run Query**, and then continue to the next part of the tutorial.

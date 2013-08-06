@@ -23,7 +23,7 @@ can use any Clojure function or Java method as a predicate function:
      [?p :person/name ?name]
      [(.startsWith ?name "M")]]
 
-Clojure functions must be fully namespace qualified so if you have
+Clojure functions must be fully namespace-qualified, so if you have
 defined your own predicate `awesome?` you must write it as
 `(my.namespace/awesome? ?movie)`. Some ubiquitous predicates can be
-used without namespace qualification: `<, >, <=, >=, =, not=` etc.
+used without namespace qualification: `<, >, <=, >=, =, not=` and so on.
