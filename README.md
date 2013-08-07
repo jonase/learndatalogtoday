@@ -1,6 +1,6 @@
 # learndatalogtoday
 
-An interactive datalog tutorial
+An interactive Datalog tutorial
 
 ## Prerequisites
 
