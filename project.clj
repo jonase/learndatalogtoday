@@ -19,6 +19,7 @@
   :source-paths ["src/clj"]
   :ring {:handler learndatalogtoday.handler/app}
   :main learndatalogtoday.handler
+  :uberjar-name "learndatalogtoday-standalone.jar"
   :profiles {:dev {:dependencies [[ring-mock "0.1.5"]]}}
   :cljsbuild {
     :builds [{
