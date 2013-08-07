@@ -2,8 +2,6 @@
 /lib
 /classes
 /checkouts
-/resources/public/third-party
-/resources/public/app.js
 pom.xml
 *.jar
 *.class
