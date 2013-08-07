@@ -8,7 +8,7 @@
 (defn footer []
   [:footer.text-center {:style "border-top: 1px solid lightgrey; margin-top: 40px;padding:10px;"}
    [:small
-    [:p [:a {:href "http://learndatalogtoday.org"} "learndatalogtoday.org"] 
+    [:p [:a {:href "http://www.learndatalogtoday.org"} "www.learndatalogtoday.org"] 
      " &copy; 2013 Jonas Enlund"]
     [:p 
      [:a {:href "https://github.com/jonase/learndatalogtoday"} "github"] " | " 
