@@ -3,7 +3,8 @@
   :url "http://learndatalogtoday.org"
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [compojure "1.1.5"]
-                 [com.datomic/datomic-free "0.8.4111"]
+                 [ring/ring-jetty-adapter "1.2.0"]
+                 [com.datomic/datomic-free "0.8.4122"]
                  [datomic-query-helpers "0.1.1"]
                  [hiccup "1.0.4"]
                  [markdown-clj "0.9.29"]
@@ -17,6 +18,7 @@
             [lein-cljsbuild "0.3.2"]]
   :source-paths ["src/clj"]
   :ring {:handler learndatalogtoday.handler/app}
+  :main learndatalogtoday.handler
   :profiles {:dev {:dependencies [[ring-mock "0.1.5"]]}}
   :cljsbuild {
     :builds [{

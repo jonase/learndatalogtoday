@@ -25,14 +25,22 @@
     (include-css "/third-party/bootstrap/css/bootstrap.css")
     (include-css "/third-party/codemirror-3.15/lib/codemirror.css")
     (include-css "/style.css")
-    [:title "Learn Datalog Today!"]]
+    [:title "Learn Datalog Today!"]
+    [:script 
+      "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40247950-2', 'learndatalogtoday.org');
+  ga('send', 'pageview');"]]
    [:body
     [:div.container
      (row [:div.textcontent text])
      (row (when (> chapter 0) 
             [:a {:href (str "/chapter/" (dec chapter))} 
              "<< Previous chapter"])
-          (when (< chapter 9) 
+          (when (< chapter 8) 
             [:a.pull-right {:href (str "/chapter/" (inc chapter))} 
              "Next chapter >>"]))
      (row [:div.exercises {:style "margin-top: 14px"} exercises])
@@ -107,7 +115,15 @@
     [:head
      (include-css "/third-party/bootstrap/css/bootstrap.css")
      (include-css "/style.css")
-     [:title "Learn Datalog Today!"]]
+     [:title "Learn Datalog Today!"]
+     [:script 
+      "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40247950-2', 'learndatalogtoday.org');
+  ga('send', 'pageview');"]]
     [:body
      [:div.container
       (row [:div.textcontent 

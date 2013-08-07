@@ -5,8 +5,8 @@
    [{:type :query
      :value [:find ?title :in $ % :where [movie-year ?title 1991]]}
     {:type :rule
-     :value [[[movie-year ?title ?year] ...]]
-     :correct-value [[[movie-year ?title ?year] 
+     :value [[(movie-year ?title ?year) ...]]
+     :correct-value [[(movie-year ?title ?year)
                       [?m :movie/title ?title]
                       [?m :movie/year ?year]]]}]}
   
@@ -17,22 +17,21 @@
              :in $ % ?name
              :where 
              [?p1 :person/name ?name]
-             [friends ?p1 ?p2]
+             (friends ?p1 ?p2)
              [?p2 :person/name ?friend]]}
     {:type :rule
-     :value [[[friends ?p1 ?p2]
+     :value [[(friends ?p1 ?p2)
               ...]]
-     :correct-value [[[friends ?p1 ?p2]
+     :correct-value [[(friends ?p1 ?p2)
                       [?m :movie/cast ?p1]
                       [?m :movie/cast ?p2]]
-                     [[friends ?p1 ?p2]
+                     [(friends ?p1 ?p2)
                       [?m :movie/cast ?p1]
                       [?m :movie/director ?p2]]
-                     [[friends ?p1 ?p2]
-                      [friends ?p2 ?p1]]]}
+                     [(friends ?p1 ?p2)
+                      (friends ?p2 ?p1)]]}
     {:type :value
-     :value "James Cameron"}
-    ]}
+     :value "James Cameron"}]}
 
   {:question "Write a rule `[sequels ?m1 ?m2]` where `?m1` and `?m2` are movie entities. You'll need to use the attribute `:movie/sequel`. To implement this rule correctly you can think of the problem like this: A movie `?m2` is a sequel of `?m1` if either 
 * `?m2` is the \"direct\" sequel of `m1` **or** 
@@ -45,14 +44,14 @@ There are (at least) three different ways to write the above query. Try to find 
              :in $ % ?title
              :where 
              [?m :movie/title ?title]
-             [sequels ?m ?s]
+             (sequels ?m ?s)
              [?s :movie/title ?sequel]]}
     {:type :rule
-     :value [[[sequels ?m1 ?m2] ...]]
-     :correct-value [[[sequels ?m1 ?m2]
+     :value [[(sequels ?m1 ?m2) ...]]
+     :correct-value [[(sequels ?m1 ?m2)
                       [?m1 :movie/sequel ?m2]]
-                     [[sequels ?m1 ?m2]
+                     [(sequels ?m1 ?m2)
                       [?m :movie/sequel ?m2]
-                      [sequels ?m1 ?m]]]}
+                      (sequels ?m1 ?m)]]}
     {:type :value
      :value "Mad Max"}]}]}
