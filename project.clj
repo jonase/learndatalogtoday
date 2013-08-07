@@ -20,6 +20,7 @@
   :ring {:handler learndatalogtoday.handler/app}
   :main learndatalogtoday.handler
   :uberjar-name "learndatalogtoday-standalone.jar"
+  :min-lein-version "2.0.0"
   :profiles {:dev {:dependencies [[ring-mock "0.1.5"]]}}
   :cljsbuild {
     :builds [{
