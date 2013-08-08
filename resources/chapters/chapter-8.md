@@ -65,9 +65,9 @@ Rules can also be used as another tool to write logical OR queries, as the
 same rule name can be used several times:
 
     [[(associated-with ?person ?movie)
-      [?movie :movie/cast ?person]
+      [?movie :movie/cast ?person]]
      [(associated-with ?person ?movie)
-      [?movie :movie/director ?person]]]]
+      [?movie :movie/director ?person]]]
 
 Subsequent rule definitions will only be used if the ones preceding it aren't satisfied.
 

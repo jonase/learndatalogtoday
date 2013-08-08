@@ -81,7 +81,7 @@ You can use collection destructuring to implement a kind of logical **or** in yo
      :in $ [?director ...]
      :where
      [?p :person/name ?director]
-     [?m :movie/director ?d]
+     [?m :movie/director ?p]
      [?m :movie/title ?title]]
 
 Here, the `?director` pattern variable is initially bound to both "James Cameron" and "Ridley Scott".
