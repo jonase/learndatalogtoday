@@ -18,8 +18,8 @@ with this function, we can now calculate the age of a person **inside the query 
      :in $ ?person ?today
      :where
      [?p :person/name ?name]
-     [?p :person/birth ?birth]
-     [(tutorial.fns/age ?birth ?today) ?age]]
+     [?p :person/born ?born]
+     [(tutorial.fns/age ?born ?today) ?age]]
 
 A transformation function clause has the shape `[(<fn> <arg1> <arg2> ...) <result-binding>]` where `<result-binding>` can be the same binding forms as we saw in [chapter 3](/chapter/3):
 
