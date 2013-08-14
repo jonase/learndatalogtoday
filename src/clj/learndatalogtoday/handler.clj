@@ -48,7 +48,7 @@
      ;; Development
      #_(read-chapter (Integer/parseInt n)))
    
-   (POST ["/query/:chapter/:exercise" :chapter #"[0-9]+" :exercise #"[0-9]+"]
+   (GET ["/query/:chapter/:exercise" :chapter #"[0-9]+" :exercise #"[0-9]+"]
      {{:keys [chapter exercise data] :as params} :params}
      (try 
        (let [chapter (Integer/parseInt chapter)
@@ -64,6 +64,7 @@
              ans-result (apply d/q ans-query db ans-args)]
          (if (= usr-result ans-result)
            (do (log/info (format "Success query [%s,%s]: %s" chapter exercise (pr-str usr-input))) 
+               
                (edn-response {:status :success
                               :result usr-result}))
            (do (log/info (format "Fail query [%s,%s]: %s" chapter exercise (pr-str usr-input))) 

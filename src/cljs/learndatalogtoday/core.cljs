@@ -46,7 +46,7 @@
     (try
       (let [input-strings (map #(.getValue %) editors)
             input-data (map read-string input-strings)]
-        (remote/post (format "/query/%s/%s" chapter exercise)
+        (remote/get (format "/query/%s/%s" chapter exercise)
                      input-data
                      #(render-result exercise (first input-data) %)))
       (catch js/Error e
@@ -79,6 +79,5 @@
 
       (listen! (sel button-id) :click
                (run-query-fn chapter n editors))
-      
       (listen! (sel show-answer-class)  :click
                (show-ans-fn chapter n editors)))))

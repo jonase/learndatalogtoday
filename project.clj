@@ -11,7 +11,7 @@
                  [fipp "0.4.0"]
                  [com.taoensso/timbre "2.4.1"]
                  ;; cljs
-                 [hylla "0.1.0"]
+                 [hylla "0.2.0"]
                  [hiccups "0.2.0"]
                  [domina "1.0.1"]]
   :plugins [[lein-ring "0.8.6"]
