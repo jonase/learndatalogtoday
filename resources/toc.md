@@ -16,6 +16,6 @@ Datomic is a new database with an interesting and novel architecture, giving its
 * [Aggregates](/chapter/7)
 * [Rules](/chapter/8)
 
-This tutorial was written on rainy days for the [Lisp In Summer Projects](http://lispinsummerprojects.org/‎) 2013. If you find bugs, or have suggestions on how to improve the tutorial, please visit the project on [github](https://github.com/jonase/learndatalogtoday).
+This tutorial was written on rainy days for the [Lisp In Summer Projects](http://lispinsummerprojects.org) 2013. If you find bugs, or have suggestions on how to improve the tutorial, please visit the project on [github](https://github.com/jonase/learndatalogtoday).
 
 Many thanks to [Robert Stuttaford](https://twitter.com/RobStuttaford) for his careful proof reading/editing.
