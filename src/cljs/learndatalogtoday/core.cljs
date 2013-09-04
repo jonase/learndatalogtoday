@@ -25,6 +25,11 @@
    [:div.alert
     [:p msg]]))
 
+(defn render-success [msg]
+  (render-html
+   [:div.alert
+    [:p msg]]))
+
 (defn render-result [exercise query result-data]
   (let [alert (sel (str "#tab" exercise " .alerts"))
         thead (sel (str "#tab" exercise " thead"))
@@ -36,7 +41,8 @@
       (domina/append! alert (render-error (:message result-data)))
       (do (if (= :fail (:status result-data))
             (domina/append! alert (render-fail "Sorry, these results are not correct"))
-            (domina/add-class! (sel ".active .label") "label-success"))
+            (do (domina/add-class! (sel ".active .label") "label-success")
+                (domina/append! alert (render-success "Correct!"))))
           (domina/append! thead (render-row (find-clause query)))
           (doseq [row (:result result-data)]
             (domina/append! tbody (render-row row)))))))
