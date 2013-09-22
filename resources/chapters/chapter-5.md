@@ -11,9 +11,9 @@ Let's start with the query for the question above:
      :where
      [?m :movie/title ?title]
      [?m :movie/year ?year]
-     [(< 1984 ?year)]]
+     [(< ?year 1984)]]
 
-The last clause, `[(< 1984 ?year)]`, is a predicate clause. The
+The last clause, `[(< ?year 1984)]`, is a predicate clause. The
 predicate clause filters the result set to only include results for
 which the predicate returns a "truthy" (non-nil, non-false) value. You
 can use any Clojure function or Java method as a predicate function:
