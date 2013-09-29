@@ -5,7 +5,7 @@ set -e
 mkdir -vp resources/public/third-party/pagedown
 mkdir -vp resources/public/third-party/jquery
 
-curl -O http://twitter.github.io/bootstrap/assets/bootstrap.zip
+curl -O curl -O http://getbootstrap.com/2.3.2/assets/bootstrap.zip
 curl -O http://codemirror.net/codemirror-3.15.zip
 curl -O https://pagedown.googlecode.com/hg-history/f2a5240e53a726e3c39b92fab9dd25fd9b7614c4/Markdown.Converter.js
 curl -O http://code.jquery.com/jquery-1.10.1.min.js
