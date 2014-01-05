@@ -57,7 +57,7 @@ to the previous one:
 
 A tuple input is written as e.g. `[?name ?age]` and can be used when
 you want to destructure an input. Let's say you have the vector
-`["James Cameron" "Arnold Schwarznegger"]` and you want to use this
+`["James Cameron" "Arnold Schwarzenegger"]` and you want to use this
 as input to find all movies where these two people collaborated:
 
     [:find ?title
