@@ -24,14 +24,15 @@
               ...]]
      :correct-value [[(friends ?p1 ?p2)
                       [?m :movie/cast ?p1]
-                      [?m :movie/cast ?p2]]
+                      [?m :movie/cast ?p2]
+                      [(not= ?p1 ?p2)]]
                      [(friends ?p1 ?p2)
                       [?m :movie/cast ?p1]
                       [?m :movie/director ?p2]]
                      [(friends ?p1 ?p2)
                       (friends ?p2 ?p1)]]}
     {:type :value
-     :value "James Cameron"}]}
+     :value "Sigourney Weaver"}]}
 
   {:question "Write a rule `[sequels ?m1 ?m2]` where `?m1` and `?m2` are movie entities. You'll need to use the attribute `:movie/sequel`. To implement this rule correctly you can think of the problem like this: A movie `?m2` is a sequel of `?m1` if either 
 * `?m2` is the \"direct\" sequel of `m1` **or** 
