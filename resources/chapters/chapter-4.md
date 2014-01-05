@@ -19,7 +19,7 @@ The above query returns a set of entity ids referring to the attributes we are i
      [?p ?a]
      [?a :db/ident ?attr]]
 
-This is because attributes are also entites in our database!
+This is because attributes are also entities in our database!
 
 ## Transactions
 
