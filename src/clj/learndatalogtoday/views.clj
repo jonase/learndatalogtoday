@@ -5,6 +5,15 @@
             [datomic-query-helpers.core :refer [pretty-query-string]]
             [fipp.edn :as fipp]))
 
+(def google-analytics-string
+  "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40247950-2', 'learndatalogtoday.org');
+  ga('send', 'pageview');")
+
 (defn footer []
   [:footer.text-center {:style "border-top: 1px solid lightgrey; margin-top: 40px;padding:10px;"}
    [:small
@@ -20,20 +29,13 @@
     content]])
 
 (defn base [chapter text exercises ecount]
-  [:html
+  (list 
    [:head
     (include-css "/third-party/bootstrap/css/bootstrap.css")
     (include-css "/third-party/codemirror-3.15/lib/codemirror.css")
     (include-css "/style.css")
     [:title "Learn Datalog Today!"]
-    [:script 
-      "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-40247950-2', 'learndatalogtoday.org');
-  ga('send', 'pageview');"]]
+    [:script google-analytics-string]]
    [:body
     [:div.container
      (row [:div.textcontent text])
@@ -50,7 +52,7 @@
     (include-js "/third-party/codemirror-3.15/mode/clojure/clojure.js")
     (include-js "/third-party/bootstrap/js/bootstrap.js")
     (include-js "/app.js")
-    (javascript-tag (format "learndatalogtoday.core.init(%s, %s);" chapter ecount))]])
+    (javascript-tag (format "learndatalogtoday.core.init(%s, %s);" chapter ecount))]))
 
 (defn build-input [tab-n input-n input]
   (let [label (condp = (:type input)
@@ -111,23 +113,16 @@
 
 (defn toc []
   (html5
-   [:html
-    [:head
-     (include-css "/third-party/bootstrap/css/bootstrap.css")
-     (include-css "/style.css")
-     [:title "Learn Datalog Today!"]
-     [:script 
-      "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+   [:head
+    (include-css "/third-party/bootstrap/css/bootstrap.css")
+    (include-css "/style.css")
+    [:title "Learn Datalog Today!"]
+    [:script google-analytics-string]]
+   [:body
+    [:div.container
+     (row [:div.textcontent 
+           (-> "resources/toc.md" slurp md/md-to-html-string)])
+     (row (footer))]
+    (include-js "/third-party/jquery/jquery-1.10.1.min.js")
+    (include-js "/third-party/bootstrap/js/bootstrap.js")]))
 
-  ga('create', 'UA-40247950-2', 'learndatalogtoday.org');
-  ga('send', 'pageview');"]]
-    [:body
-     [:div.container
-      (row [:div.textcontent 
-            (-> "resources/toc.md" slurp md/md-to-html-string)])
-      (row (footer))]
-     (include-js "/third-party/jquery/jquery-1.10.1.min.js")
-     (include-js "/third-party/bootstrap/js/bootstrap.js")]]))
