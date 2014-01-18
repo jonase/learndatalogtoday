@@ -23,6 +23,25 @@
             {:type :value
              :value ["Lethal Weapon" "Lethal Weapon 2" "Lethal Weapon 3"]}]}
 
+  {:question "Find all movie `?title`s where the `?actor` and the `?director` has worked together"
+   :inputs [{:type :query
+             :value [:find ?title 
+                     :in $ ?actor ?director
+                     :where 
+                     ...]
+             :correct-value [:find ?title 
+                             :in $ ?actor ?director
+                             :where 
+                             [?a :person/name ?actor]
+                             [?d :person/name ?director]
+                             [?m :movie/cast ?a]
+                             [?m :movie/director ?d]
+                             [?m :movie/title ?title]]}
+            {:type :value
+             :value "Michael Biehn"}
+            {:type :value
+             :value "James Cameron"}]}
+
   {:question "Write a query that, given an actor name and a relation with movie-title/rating, finds the movie titles and corresponding rating for which that actor was a cast member."
    :inputs [{:type :query
              :value [:find ?title ?rating :in ... :where ...]
