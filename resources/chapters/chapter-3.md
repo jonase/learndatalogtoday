@@ -3,7 +3,7 @@
 Looking at this query:
 
     [:find ?title
-     :where 
+     :where
      [?p :person/name "Sylvester Stallone"]
      [?m :movie/cast ?p]
      [?m :movie/title ?title]]
@@ -18,7 +18,7 @@ Here's that query with an input parameter for the actor:
 
     [:find ?title
      :in $ ?name
-     :where 
+     :where
      [?p :person/name ?name]
      [?m :movie/cast ?p]
      [?m :movie/title ?title]]
@@ -28,7 +28,7 @@ if no `:in` clause is specified) and `?name` which presumably will be
 the name of some actor.
 
 The above query is executed like `(q query db "Sylvester Stallone")`,
-where `query` is the query we just saw, and `db` is a database value. 
+where `query` is the query we just saw, and `db` is a database value.
 You can have any number of inputs to a query.
 
 In the above query, the input pattern variable `?name` is bound to a
@@ -37,7 +37,7 @@ input: scalars, tuples, collections and relations.
 
 ## A quick aside
 
-Hold on. Where does that `$` get used? In query, each of these data 
+Hold on. Where does that `$` get used? In query, each of these data
 patterns is actually a **5 tuple**, of the form:
 
     [<database> <entity-id> <attribute> <value> <transaction-id>]
@@ -48,7 +48,7 @@ to the previous one:
 
     [:find ?title
      :in $ ?name
-     :where 
+     :where
      [$ ?p :person/name ?name]
      [$ ?m :movie/cast ?p]
      [$ ?m :movie/title ?title]]
@@ -62,7 +62,7 @@ as input to find all movies where these two people collaborated:
 
     [:find ?title
      :in $ [?director ?actor]
-     :where 
+     :where
      [?d :person/name ?director]
      [?a :person/name ?actor]
      [?m :movie/director ?d]
@@ -84,7 +84,7 @@ You can use collection destructuring to implement a kind of logical **or** in yo
      [?m :movie/director ?p]
      [?m :movie/title ?title]]
 
-Here, the `?director` pattern variable is initially bound to both "James Cameron" and "Ridley Scott".
+Here, the `?director` pattern variable is initially bound to both "James Cameron" and "Ridley Scott". Note that the ellipsis following `?director` is a literal, not elided code.
 
 ## Relations
 
@@ -95,9 +95,9 @@ your database.
 As a simple example, let's consider a relation with tuples `[movie-title box-office-earnings]`:
 
     [
-     ... 
+     ...
      ["Die Hard" 140700000]
-     ["Alien" 104931801] 
+     ["Alien" 104931801]
      ["Lethal Weapon" 120207127]
      ["Commando" 57491000]
      ...
@@ -108,7 +108,7 @@ box office earnings for a particular director:
 
     [:find ?title ?box-office
      :in $ ?director [[?title ?box-office]]
-     :where 
+     :where
      [?p :person/name ?director]
      [?m :movie/director ?p]
      [?m :movie/title ?title]]
