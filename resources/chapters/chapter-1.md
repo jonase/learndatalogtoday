@@ -36,7 +36,7 @@ followed by one or more **pattern variables** (symbols starting with `?`,
 e.g. `?title`). After the find clause comes the `:where` clause which
 restricts the query to datoms that match the given **data patterns**.
 
-For example, this query finds all entity-ids that has the attribute 
+For example, this query finds all entity-ids that have the attribute 
 `:person/name` with a value of `"Ridley Scott"`:
 
     [:find ?e
