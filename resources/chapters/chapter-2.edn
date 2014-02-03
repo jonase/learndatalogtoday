@@ -22,7 +22,7 @@
              :value [:find ?name :where ...]
              :correct-value [:find ?name :where [?m :movie/title "RoboCop"] [?m :movie/director ?d] [?d :person/name ?name]]}]}
 
-  {:question "Find directors who has directed Arnold Schwarzenegger in a movie."
+  {:question "Find directors who have directed Arnold Schwarzenegger in a movie."
    :inputs [{:type :query
              :value [:find ?name :where ...]
              :correct-value [:find ?name 
