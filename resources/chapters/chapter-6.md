@@ -15,7 +15,7 @@ person:
 with this function, we can now calculate the age of a person **inside the query itself**:
 
     [:find ?age
-     :in $ ?person ?today
+     :in $ ?name ?today
      :where
      [?p :person/name ?name]
      [?p :person/born ?born]
