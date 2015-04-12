@@ -76,7 +76,7 @@ Using this rule, we can find both directors and cast members very easily:
     [:find ?name
      :in $ %
      :where
-     [?m :movie/name "Predator"]
+     [?m :movie/title "Predator"]
      (associated-with ?p ?m)
      [?p :person/name ?name]]
 
