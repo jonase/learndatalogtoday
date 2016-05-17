@@ -1,7 +1,7 @@
 (ns learndatalogtoday.core
   (:require [learndatalogtoday.reader :refer [read-string]]
             [datomic-query-helpers.core :refer [normalize]]
-            [hylla.remote :as remote] 
+            [hylla.remote :as remote]
             [domina :refer [by-id nodes]]
             [domina.css :refer [sel]]
             [domina.events :refer [listen! prevent-default]]
@@ -10,12 +10,12 @@
 (defn find-clause [q]
   (:find (normalize q)))
 
-(defn render-row [row] 
-  (render-html 
+(defn render-row [row]
+  (render-html
    [:tr (for [x row] [:td (pr-str x)])]))
 
 (defn render-error [msg]
-  (render-html 
+  (render-html
    [:div.alert.alert-error
     [:strong "Oh snap!"]
     [:p msg]]))
@@ -46,20 +46,20 @@
     (try
       (let [input-strings (map #(.getValue %) editors)
             input-data (map read-string input-strings)]
-        (remote/get (format "/query/%s/%s" chapter exercise)
+        (remote/get (str "/query/" chapter "/" exercise)
                      input-data
                      #(render-result exercise (first input-data) %)))
       (catch js/Error e
-        (render-result exercise nil 
-                       {:status :error 
+        (render-result exercise nil
+                       {:status :error
                         :message (.-message e)})))))
 
 (defn show-ans-fn [chapter exercise editors]
   (fn [e]
     (prevent-default e)
-    (remote/get (format "/answer/%s/%s" chapter exercise)
+    (remote/get (str "/answer/" chapter "/" exercise)
                 nil
-                (fn [ans] 
+                (fn [ans]
                   (mapv #(.setValue %1 %2) editors ans)))))
 
 (defn ^:export init [chapter ecount]
@@ -69,12 +69,12 @@
           editors (mapv #(.fromTextArea js/CodeMirror %)
                         (nodes (sel input-class)))
           show-answer-class (str ".show-ans-" n)]
-      
+
       ;; Need to refresh the codemirror editors when tab is shown. I'd
       ;; rather do this with domina but "shown" is a bootstrap
       ;; specific event.
-      (.on (js/$ "a[data-toggle=\"tab\"]") 
-           "shown" 
+      (.on (js/$ "a[data-toggle=\"tab\"]")
+           "shown"
            (fn [e] (mapv #(.refresh %) editors)))
 
       (listen! (sel button-id) :click
