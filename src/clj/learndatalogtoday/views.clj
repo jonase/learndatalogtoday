@@ -1,9 +1,9 @@
 (ns learndatalogtoday.views
-  (:require [hiccup.page :refer [html5 include-js include-css]]
+  (:require [datomic-query-helpers.core :refer [pretty-query-string]]
+            [fipp.edn :as fipp]
             [hiccup.element :refer [javascript-tag]]
-            [markdown.core :as md]
-            [datomic-query-helpers.core :refer [pretty-query-string]]
-            [fipp.edn :as fipp]))
+            [hiccup.page :refer [html5 include-js include-css]]
+            [markdown.core :as md]))
 
 (def google-analytics-string
   "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -17,10 +17,10 @@
 (defn footer []
   [:footer.text-center {:style "border-top: 1px solid lightgrey; margin-top: 40px;padding:10px;"}
    [:small
-    [:p [:a {:href "http://www.learndatalogtoday.org"} "www.learndatalogtoday.org"] 
-     " &copy; 2013 Jonas Enlund"]
-    [:p 
-     [:a {:href "https://github.com/jonase/learndatalogtoday"} "github"] " | " 
+    [:p [:a {:href "http://www.learndatalogtoday.org"} "www.learndatalogtoday.org"]
+     " &copy; 2013 - 2016 Jonas Enlund"]
+    [:p
+     [:a {:href "https://github.com/jonase/learndatalogtoday"} "github"] " | "
      [:a {:href "http://lispinsummerprojects.org/"} "lispinsummerprojects.org"]]]])
 
 (defn row [& content]
@@ -29,7 +29,7 @@
     content]])
 
 (defn base [chapter text exercises ecount]
-  (list 
+  (list
    [:head
     (include-css "/third-party/bootstrap/css/bootstrap.css")
     (include-css "/third-party/codemirror-3.15/lib/codemirror.css")
@@ -39,11 +39,11 @@
    [:body
     [:div.container
      (row [:div.textcontent text])
-     (row (when (> chapter 0) 
-            [:a {:href (str "/chapter/" (dec chapter))} 
+     (row (when (> chapter 0)
+            [:a {:href (str "/chapter/" (dec chapter))}
              "<< Previous chapter"])
-          (when (< chapter 8) 
-            [:a.pull-right {:href (str "/chapter/" (inc chapter))} 
+          (when (< chapter 8)
+            [:a.pull-right {:href (str "/chapter/" (inc chapter))}
              "Next chapter >>"]))
      (row [:div.exercises {:style "margin-top: 14px"} exercises])
      (row (footer))]
@@ -65,7 +65,7 @@
                     :value (with-out-str (fipp/pprint (:value input))))]
     [:div.span8
      [:div.row
-      [:div.span8 [:p [:small [:strong label] 
+      [:div.span8 [:p [:small [:strong label]
                        (when (= :query (:type input))
                          [:span.pull-right "[ " [:a {:href "#" :class (str "show-ans-" tab-n)} "I give up!"] " ]"])]]]]
      [:div.row
@@ -75,16 +75,16 @@
   (map-indexed (partial build-input tab-n) inputs))
 
 (defn build-exercise [tab-n exercise]
-  (list [:div {:class (if (zero? tab-n) "tab-pane active" "tab-pane") 
+  (list [:div {:class (if (zero? tab-n) "tab-pane active" "tab-pane")
                :id (str "tab" tab-n)}
-         
+
          (md/md-to-html-string (:question exercise))
          [:div.row.inputs
           (build-inputs tab-n (:inputs exercise))]
          [:div.row
           [:div.span8
-           [:button.btn.btn-block {:id (str "run-query-" tab-n) 
-                                   :data-tab tab-n} 
+           [:button.btn.btn-block {:id (str "run-query-" tab-n)
+                                   :data-tab tab-n}
             "Run Query"]]]
          [:div.row
           [:div.span8
@@ -97,8 +97,8 @@
   (list [:div.tabbable
          [:ul.nav.nav-tabs
           (for [n (range (count exercises))]
-            [:li (when (zero? n) {:class "active"}) 
-             [:a {:href (str "#tab" n) 
+            [:li (when (zero? n) {:class "active"})
+             [:a {:href (str "#tab" n)
                   :data-toggle "tab"}
               [:span.label n]]])]
          [:div.tab-content
@@ -120,9 +120,8 @@
     [:script google-analytics-string]]
    [:body
     [:div.container
-     (row [:div.textcontent 
+     (row [:div.textcontent
            (-> "resources/toc.md" slurp md/md-to-html-string)])
      (row (footer))]
     (include-js "/third-party/jquery/jquery-1.10.1.min.js")
     (include-js "/third-party/bootstrap/js/bootstrap.js")]))
-
