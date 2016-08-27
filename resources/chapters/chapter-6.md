@@ -3,7 +3,7 @@
 **Transformation functions** are pure (= side-effect free) functions
 or methods which can be used in queries to transform values and bind
 their results to pattern variables. Say, for example, there exists an
-attribute `:person/birth` with type `:db.type/instant`. Given the
+attribute `:person/born` with type `:db.type/instant`. Given the
 birthday, it's easy to calculate the (very approximate) age of a
 person:
 
