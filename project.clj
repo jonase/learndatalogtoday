@@ -1,11 +1,11 @@
 (defproject learndatalogtoday "0.1.0-SNAPSHOT"
   :description "Interactive Datalog Tutorial"
   :url "http://learndatalogtoday.org"
-  :dependencies [[org.clojure/clojure "1.7.0"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.8.51"]
                  [compojure "1.1.5"]
                  [ring/ring-jetty-adapter "1.2.0"]
-                 [com.datomic/datomic-free "0.8.4122"]
+                 [com.datomic/datomic-free "0.9.5394"]
                  [datomic-query-helpers "0.1.1"]
                  [hiccup "1.0.4"]
                  [markdown-clj "0.9.29"]
