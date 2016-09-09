@@ -15,7 +15,7 @@ You will need [Leiningen](https://github.com/technomancy/leiningen) installed.
 
 ## Running the webapp
 
-    $ lein ring server
+    $ DEVMODE=true lein ring server
 
 A browser window should open, otherwise visit http://localhost:3000.
 
