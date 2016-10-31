@@ -11,7 +11,7 @@ You will need [Leiningen](https://github.com/technomancy/leiningen) installed.
     $ git clone git@github.com:jonase/learndatalogtoday.git
     $ cd learndatalogtoday
     $ ./fetch-js-deps.sh
-    $ lein cljsbuild clean && lein cljsbuild once
+    $ lein cljsbuild once
 
 ## Running the webapp
 
