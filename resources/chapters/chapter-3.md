@@ -106,7 +106,7 @@ As a simple example, let's consider a relation with tuples `[movie-title box-off
 Let's use this data and the data in our database to find
 box office earnings for a particular director:
 
-    [:find ?title ?box-office
+    [:find ?director ?box-office
      :in $ ?director [[?title ?box-office]]
      :where
      [?p :person/name ?director]
