@@ -17,7 +17,7 @@ in your favorite programming language. Let's create a rule for the three lines a
      [?m :movie/cast ?p]
      [?m :movie/title ?title]]
 
-The first vector is called the *head* of the rule where the first
+The first vector element is called the *head* of the rule where the first
 symbol is the name of the rule. The rest of the rule is called the body. 
 
 It is possible to use `(...)` or `[...]` to enclose it, but it is conventional to use `(...)` to aid the eye when distinguishing between the rule's head and its body, and also between rule invocations and normal data patterns, as we'll see below.
