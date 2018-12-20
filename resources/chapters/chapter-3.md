@@ -75,7 +75,7 @@ Of course, in this case, you could just as well use two distinct inputs instead:
 
 ## Collections
 
-You can use collection destructuring to implement a kind of logical **or** in your query. Say you want to find all movies directed by either James Cameron **or** Ridley Scott:
+You can use collection destructuring to implement a kind of logical **or** in your query. Say you want to find all movies directed by either James Cameron **or** Ridley Scott. You would use the vector `["James Cameron" "Ridley Scott"]` as input to the following query:
 
     [:find ?title
      :in $ [?director ...]
