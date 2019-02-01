@@ -17,7 +17,7 @@
                  [domina "1.0.3"]]
   :plugins [[lein-ring "0.9.7"]
             [lein-cljsbuild "1.1.4"]]
-  :jvm-opts ["--add-modules" "java.se.ee"]
+  :jvm-opts ["-XX:+IgnoreUnrecognizedVMOptions" "--add-modules java.xml.bind"]
   :source-paths ["src/clj"]
   :ring {:handler learndatalogtoday.handler/app}
   :main learndatalogtoday.handler
