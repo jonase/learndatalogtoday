@@ -1,5 +1,7 @@
 (ns learndatalogtoday.handler
-  (:require [clojure.edn :as edn]
+  (:gen-class)
+  (:require [clojure.java.io :as io]
+            [clojure.edn :as edn]
             [compojure.core :refer [routes GET POST]]
             [compojure.handler :as handler]
             [compojure.route :as route]
@@ -24,11 +26,12 @@
    :body (pr-str edn-data)})
 
 (defn read-file [s]
-  (read-string (slurp s)))
+  (with-open [r (io/reader (io/resource s))]
+    (read-string (slurp r))))
 
 (defn read-chapter-data [chapter]
   (->> chapter
-       (format "resources/chapters/chapter-%s.edn")
+       (format "chapters/chapter-%s.edn")
        read-file))
 
 (defn read-chapter
@@ -122,10 +125,10 @@
     (d/db conn)))
 
 (def app
-  (let [schema (read-file "resources/db/schema.edn")
-        seed-data (read-file "resources/db/data.edn")
+  (let [schema (read-file "db/schema.edn")
+        seed-data (read-file "db/data.edn")
         db (init-db "movies" schema seed-data)
-        chapters (mapv read-chapter (range 9))]
+        chapters (mapv read-chapter (range 8))] ;; TODO 9
     (handler/site (app-routes db chapters))))
 
 (defn -main []

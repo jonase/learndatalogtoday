@@ -1,4 +1,4 @@
-{:text-file "resources/chapters/chapter-6.md"
+{:text-file "chapters/chapter-6.md"
  :exercises 
  [{:question "Find people by age. Use the function `tutorial.fns/age` to find the age given a birthday and a date representing \"today\"."
    :inputs [{:type :query

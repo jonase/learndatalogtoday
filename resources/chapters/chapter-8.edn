@@ -1,4 +1,4 @@
-{:text-file "resources/chapters/chapter-8.md"
+{:text-file "chapters/chapter-8.md"
  :exercises 
  [{:question "Write a rule `[movie-year ?title ?year]` where `?title` is the title of some movie and `?year` is that movies release year."
    :inputs

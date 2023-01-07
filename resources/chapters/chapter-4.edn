@@ -1,4 +1,4 @@
-{:text-file "resources/chapters/chapter-4.md"
+{:text-file "chapters/chapter-4.md"
  :exercises 
  [{:question "What attributes are associated with a given movie."
    :inputs 

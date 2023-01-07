@@ -11,6 +11,7 @@
                  [markdown-clj "0.9.89"]
                  [fipp "0.6.6"]
                  [com.taoensso/timbre "4.7.4"]
+                 [org.clojure/core.rrb-vector "0.1.2"]
                  ;; cljs
                  [hylla "0.2.0"]
                  [hiccups "0.3.0"]
@@ -20,6 +21,7 @@
   :source-paths ["src/clj"]
   :ring {:handler learndatalogtoday.handler/app}
   :main learndatalogtoday.handler
+  :aot :all
   :uberjar-name "learndatalogtoday-standalone.jar"
   :min-lein-version "2.0.0"
   :profiles {:dev {:dependencies [[ring-mock "0.1.5"]]}}

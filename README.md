@@ -1,30 +1,20 @@
-# learndatalogtoday
+# [learndatalogtoday](https://www.learndatalogtoday.org)
 
-An interactive Datalog tutorial
+An interactive [Datalog tutorial](https://www.learndatalogtoday.org).
 
 ## Prerequisites
 
-You will need [Leiningen](https://github.com/technomancy/leiningen) installed.
+You will need [Leiningen](https://github.com/technomancy/leiningen) and java installed.
 
-## Bootstrapping
+## Run locally
 
-    $ git clone git@github.com:jonase/learndatalogtoday.git
-    $ cd learndatalogtoday
-    $ ./fetch-js-deps.sh
-    $ lein clean && lein cljsbuild once
+    $ lein uberjar
+    $ java -cp target/learndatalogtoday-standalone.jar clojure.main -m learndatalogtoday.handler
 
-## Running the webapp
-
-    $ DEVMODE=true lein ring server
-
-A browser window should open, otherwise visit http://localhost:3000.
-
-## Feedback welcome
-
-You can open issues on the github issue tracker or you can email me your suggestions/bugs/typos/feedback/etc. Pull requests welcome!
+Server is now running on `$PORT` (`http://localhost:8080` by default).
 
 ## License
 
-Copyright © 2013 Jonas Enlund
+Copyright © 2013-2023 Jonas Enlund
 
 Distributed under the Eclipse Public License, the same as Clojure.

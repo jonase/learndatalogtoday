@@ -1,5 +1,5 @@
 {:title "Data Patterns"
- :text-file "resources/chapters/chapter-2.md"
+ :text-file "chapters/chapter-2.md"
  :exercises
  [{:question "Find movie titles made in 1985"
    :inputs [{:type :query

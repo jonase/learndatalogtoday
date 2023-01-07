@@ -13,3 +13,5 @@ pom.xml
 .lein-env
 *~
 libpeerconnection.log
+.clj-kondo
+.lein-repl-history

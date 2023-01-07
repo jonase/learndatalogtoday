@@ -1,24 +1,16 @@
 (ns learndatalogtoday.views
-  (:require [datomic-query-helpers.core :refer [pretty-query-string]]
+  (:require [clojure.java.io :as io]
+            [datomic-query-helpers.core :refer [pretty-query-string]]
             [fipp.edn :as fipp]
             [hiccup.element :refer [javascript-tag]]
             [hiccup.page :refer [html5 include-js include-css]]
             [markdown.core :as md]))
 
-(def google-analytics-string
-  "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-40247950-2', 'learndatalogtoday.org');
-  ga('send', 'pageview');")
-
 (defn footer []
   [:footer.text-center {:style "border-top: 1px solid lightgrey; margin-top: 40px;padding:10px;"}
    [:small
-    [:p [:a {:href "http://www.learndatalogtoday.org"} "www.learndatalogtoday.org"]
-     " &copy; 2013 - 2016 Jonas Enlund"]
+    [:p [:a {:href "https://www.learndatalogtoday.org"} "www.learndatalogtoday.org"]
+     " &copy; 2013 - 2023 Jonas Enlund"]
     [:p
      [:a {:href "https://github.com/jonase/learndatalogtoday"} "github"] " | "
      [:a {:href "http://lispinsummerprojects.org/"} "lispinsummerprojects.org"]]]])
@@ -34,8 +26,7 @@
     (include-css "/third-party/bootstrap/css/bootstrap.css")
     (include-css "/third-party/codemirror-3.15/lib/codemirror.css")
     (include-css "/style.css")
-    [:title "Learn Datalog Today!"]
-    [:script google-analytics-string]]
+    [:title "Learn Datalog Today!"]]
    [:body
     [:div.container
      (row [:div.textcontent text])
@@ -104,8 +95,13 @@
          [:div.tab-content
           (map-indexed build-exercise exercises)]]))
 
+(defn read-chapter [file]
+  (with-open [r (io/reader (io/resource file))]
+    (md/md-to-html-string (slurp r))))
+
 (defn chapter-response [chapter-data]
-  (let [text (-> chapter-data :text-file slurp md/md-to-html-string)
+
+  (let [text (-> chapter-data :text-file read-chapter md/md-to-html-string)
         exercises (build-exercises (:exercises chapter-data))
         ecount (count (:exercises chapter-data))
         chapter (:chapter chapter-data)]
@@ -116,12 +112,12 @@
    [:head
     (include-css "/third-party/bootstrap/css/bootstrap.css")
     (include-css "/style.css")
-    [:title "Learn Datalog Today!"]
-    [:script google-analytics-string]]
+    [:title "Learn Datalog Today!"]]
    [:body
     [:div.container
-     (row [:div.textcontent
-           (-> "resources/toc.md" slurp md/md-to-html-string)])
+     (row [:div.textcontent (md/md-to-html-string
+                             (with-open [r (io/reader (io/resource "toc.md"))]
+                               (slurp r)))])
      (row (footer))]
     (include-js "/third-party/jquery/jquery-1.10.1.min.js")
     (include-js "/third-party/bootstrap/js/bootstrap.js")]))

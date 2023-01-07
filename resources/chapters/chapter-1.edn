@@ -1,5 +1,5 @@
 {:title "Basic Queries"
- :text-file "resources/chapters/chapter-1.md"
+ :text-file "chapters/chapter-1.md"
  :exercises [{:question "Find the entity ids of movies made in 1987"
               :hints ["You will need to use the `:movie/year` attribute" 
                       "The data pattern should look something like `[?e :movie/title 1987]`"]

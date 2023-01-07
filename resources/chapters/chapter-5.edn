@@ -1,4 +1,4 @@
-{:text-file "resources/chapters/chapter-5.md"
+{:text-file "chapters/chapter-5.md"
  :exercises 
  [{:question "Find movies older than a certain year (inclusive)"
    :inputs 
