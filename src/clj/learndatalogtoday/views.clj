@@ -100,8 +100,7 @@
     (md/md-to-html-string (slurp r))))
 
 (defn chapter-response [chapter-data]
-
-  (let [text (-> chapter-data :text-file read-chapter md/md-to-html-string)
+  (let [text (-> chapter-data :text-file read-chapter)
         exercises (build-exercises (:exercises chapter-data))
         ecount (count (:exercises chapter-data))
         chapter (:chapter chapter-data)]
